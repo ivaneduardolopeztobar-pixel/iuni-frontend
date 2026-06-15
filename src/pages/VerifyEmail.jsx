@@ -18,7 +18,8 @@ export default function VerifyEmail() {
       .then(r => {
         login(r.data);
         setStatus("success");
-        setTimeout(() => navigate("/home"), 3000);
+        // Redirigir al onboarding si es nuevo usuario
+        setTimeout(() => navigate("/onboarding"), 2000);
       })
       .catch(err => {
         setStatus("error");

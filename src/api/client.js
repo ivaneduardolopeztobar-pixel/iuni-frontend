@@ -13,17 +13,23 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
+let isRedirecting = false;
+
 api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      const publicRoutes = ["/auth/login", "/auth/register", "/reset/"];
+      const publicRoutes = ["/auth/login", "/auth/register", "/reset/", "/auth/verify"];
       const isPublic = publicRoutes.some(r => error.config?.url?.includes(r));
-      if (!isPublic) {
-        localStorage.clear();
-        // Usar location solo si no estamos ya en login
-        if (!window.location.pathname.includes("/login")) {
-          window.location.replace("/login");
+      if (!isPublic && !isRedirecting) {
+        const currentPath = window.location.pathname;
+        if (currentPath !== "/login" && currentPath !== "/" && currentPath !== "/register") {
+          isRedirecting = true;
+          localStorage.clear();
+          setTimeout(() => {
+            isRedirecting = false;
+            window.location.href = "/login";
+          }, 100);
         }
       }
     }

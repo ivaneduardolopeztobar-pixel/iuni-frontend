@@ -63,6 +63,17 @@ export default function MyFavorites() {
                   )}
                 </div>
                 <div className="flex gap-2 shrink-0">
+                  <button
+                    onClick={e => {
+                      e.stopPropagation();
+                      const url = window.location.origin + "/jobs/" + fav.jobPostId;
+                      const text = "Mira esta oferta en iUNI: " + fav.jobPost?.title + ". Aplica aqui: " + url;
+                      window.open("https://wa.me/?text=" + encodeURIComponent(text), "_blank");
+                    }}
+                    className="p-2 hover:bg-gray-800 rounded-lg transition"
+                  >
+                    <Share2 size={16} className="text-gray-600 hover:text-green-500 transition" />
+                  </button>
                   <button onClick={e => remove(e, fav.jobPostId)} className="p-2 hover:bg-gray-800 rounded-lg transition">
                     <Heart size={16} className="text-red-500 fill-red-500" />
                   </button>

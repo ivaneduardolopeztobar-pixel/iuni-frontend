@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, MapPin, Briefcase, DollarSign, GraduationCap, Users, ShieldCheck } from 'lucide-react';
+import { ArrowLeft, MapPin, Briefcase, DollarSign, GraduationCap, Users, ShieldCheck, Share2, MessageCircle, Copy, CheckCircle } from 'lucide-react';
 import SEO from '../components/SEO';
 import Navbar from '../components/Navbar';
 import api from '../api/client';
@@ -11,10 +11,29 @@ export default function JobDetail() {
   const [job, setJob] = useState(null);
   const [loading, setLoading] = useState(true);
   const [applying, setApplying] = useState(false);
+  const [showShare, setShowShare] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     api.get(`/jobs/${id}`).then(r => setJob(r.data)).catch(() => navigate('/home')).finally(() => setLoading(false));
   }, [id]);
+
+  const jobUrl = window.location.href;
+
+  const shareWhatsApp = () => {
+    const text = "Mira esta oferta de empleo en iUNI: " + (job?.title || "") + " en " + (job?.employer?.companyName || "") + ". Aplica aqui: " + jobUrl;
+    window.open("https://wa.me/?text=" + encodeURIComponent(text), "_blank");
+  };
+
+  const shareFacebook = () => {
+    window.open("https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(jobUrl), "_blank");
+  };
+
+  const copyLink = () => {
+    navigator.clipboard.writeText(jobUrl);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   const handleApply = async () => {
     setApplying(true);
@@ -84,7 +103,40 @@ export default function JobDetail() {
             {job?.studentBenefits && <Section title="Beneficios estudiantiles" content={job.studentBenefits} />}
           </div>
 
-          <div className="mt-8 pt-6 border-t border-gray-800 flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-0 justify-between">
+          <div className="mt-8 pt-6 border-t border-gray-800">
+            {/* Share */}
+            <div className="relative mb-4">
+              <button
+                onClick={() => setShowShare(!showShare)}
+                className="flex items-center gap-2 text-gray-400 hover:text-white text-sm transition"
+              >
+                <Share2 size={16} /> Compartir oferta
+              </button>
+              {showShare && (
+                <div className="absolute left-0 top-8 bg-gray-900 border border-gray-800 rounded-xl shadow-2xl p-3 z-20 flex gap-2">
+                  <button
+                    onClick={shareWhatsApp}
+                    className="flex items-center gap-2 bg-green-700 hover:bg-green-600 text-white text-xs font-bold px-4 py-2 rounded-lg transition"
+                  >
+                    <MessageCircle size={14} /> WhatsApp
+                  </button>
+                  <button
+                    onClick={shareFacebook}
+                    className="flex items-center gap-2 bg-blue-700 hover:bg-blue-600 text-white text-xs font-bold px-4 py-2 rounded-lg transition"
+                  >
+                    Facebook
+                  </button>
+                  <button
+                    onClick={copyLink}
+                    className="flex items-center gap-2 bg-gray-700 hover:bg-gray-600 text-white text-xs font-bold px-4 py-2 rounded-lg transition"
+                  >
+                    {copied ? <CheckCircle size={14} className="text-green-400" /> : <Copy size={14} />}
+                    {copied ? "Copiado" : "Copiar link"}
+                  </button>
+                </div>
+              )}
+            </div>
+            <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-0 justify-between">
             <div className="flex items-center gap-2 text-gray-500 text-sm">
               <Users size={16} />
               <span>{job?.applications?.length || 0} postulantes</span>
@@ -96,6 +148,7 @@ export default function JobDetail() {
             >
               {applying ? 'Enviando...' : 'Postularme ahora'}
             </button>
+            </div>
           </div>
         </div>
       </div>
