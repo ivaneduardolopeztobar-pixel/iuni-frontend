@@ -24,6 +24,8 @@ import AdminDashboard from "./pages/AdminDashboard";
 import JobAlerts from "./pages/JobAlerts";
 import EmployerMetrics from "./pages/EmployerMetrics";
 import Onboarding from "./pages/Onboarding";
+import EmployerPublicProfile from "./pages/EmployerPublicProfile";
+import Terms from "./pages/Terms";
 
 const Loading = () => (
   <div className="min-h-screen bg-black flex items-center justify-center">
@@ -86,6 +88,8 @@ export default function App() {
 
           <Route path="/onboarding" element={<PrivateRoute role="STUDENT"><Onboarding /></PrivateRoute>} />
 
+          <Route path="/employer/view/:employerId" element={<PrivateRoute><EmployerPublicProfile /></PrivateRoute>} />
+
           {/* Rutas estudiante */}
           <Route path="/home" element={<PrivateRoute role="STUDENT"><StudentHome /></PrivateRoute>} />
           <Route path="/jobs/:id" element={<PrivateRoute><JobDetail /></PrivateRoute>} />
@@ -107,6 +111,8 @@ export default function App() {
 
           {/* Admin */}
           <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
+
+          <Route path="/terms" element={<Terms />} />
 
           {/* 404 */}
           <Route path="*" element={<NotFound />} />

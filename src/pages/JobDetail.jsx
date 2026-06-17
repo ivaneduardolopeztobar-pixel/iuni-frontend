@@ -11,6 +11,7 @@ export default function JobDetail() {
   const [job, setJob] = useState(null);
   const [loading, setLoading] = useState(true);
   const [applying, setApplying] = useState(false);
+  const [showApplyModal, setShowApplyModal] = useState(false);
   const [showShare, setShowShare] = useState(false);
   const [copied, setCopied] = useState(false);
 
@@ -53,6 +54,17 @@ export default function JobDetail() {
 
   return (
     <div className="min-h-screen bg-black text-white">
+      {showApplyModal && job && (
+        <ApplyModal
+          jobId={job.id}
+          jobTitle={job.title}
+          onClose={() => setShowApplyModal(false)}
+          onSuccess={() => {
+            setShowApplyModal(false);
+            alert("Postulacion enviada exitosamente!");
+          }}
+        />
+      )}
       <SEO
         title={job ? job.title + " en " + (job.employer?.companyName || "") : "Empleo"}
         description={job ? "Oferta de trabajo: " + job.title + " en " + (job.employer?.companyName || "") + (job.employer?.city ? ", " + job.employer.city : "") + ". " + (job.description ? job.description.substring(0, 120) : "") : ""}
@@ -77,7 +89,12 @@ export default function JobDetail() {
             <div>
               <h1 className="text-2xl font-black">{job?.title}</h1>
               <div className="flex items-center gap-2">
-              <p className="text-red-500 font-semibold">{job?.employer?.companyName}</p>
+              <button
+                onClick={() => job?.employer?.id && navigate("/employer/view/" + job.employer.id)}
+                className="text-red-500 font-semibold hover:text-red-400 transition hover:underline"
+              >
+                {job?.employer?.companyName}
+              </button>
               {job?.employer?.verified && (
                 <span className="flex items-center gap-1 text-xs font-bold text-green-400 bg-green-950 border border-green-900 px-2 py-0.5 rounded-full">
                   <ShieldCheck size={11}/> Verificada

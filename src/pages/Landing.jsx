@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import SEO from "../components/SEO";
 import { Briefcase, Users, Star, ArrowRight, CheckCircle } from "lucide-react";
 
@@ -147,6 +147,7 @@ export default function Landing() {
         <p className="text-xl font-black text-white mb-2"><span className="text-red-600">i</span>UNI</p>
         <p>Universidad de El Salvador — Ingenieria en Desarrollo de Software</p>
         <p className="mt-1">2025 — Todos los derechos reservados</p>
+        <Link to="/terms" className="text-gray-600 hover:text-gray-400 text-xs mt-2 inline-block transition">Terminos y Privacidad</Link>
       </footer>
 
     </div>

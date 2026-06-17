@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { MapPin, Briefcase, Heart, Search, Clock, SlidersHorizontal, X, ChevronLeft, ChevronRight, ShieldCheck, Share2 } from "lucide-react";
 import Navbar from "../components/Navbar";
+import ApplyModal from "../components/ApplyModal";
 import SEO from "../components/SEO";
 import api from "../api/client";
 import { useAuth } from "../context/AuthContext";
@@ -18,6 +19,7 @@ export default function StudentHome() {
   const [jobType, setJobType] = useState("Todos");
   const [loading, setLoading] = useState(true);
   const [applying, setApplying] = useState(null);
+  const [applyModal, setApplyModal] = useState(null);
   const [showFilters, setShowFilters] = useState(false);
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
@@ -102,15 +104,9 @@ export default function StudentHome() {
     try { await api.post("/favorites/" + jobId + "/toggle"); } catch {}
   };
 
-  const handleApply = async (e, jobId) => {
+  const handleApply = (e, job) => {
     e.stopPropagation();
-    setApplying(jobId);
-    try {
-      await api.post("/applications/" + jobId + "/apply");
-      alert("Postulacion enviada exitosamente!");
-    } catch (err) {
-      alert(err.response?.data?.error || "Error al postular");
-    } finally { setApplying(null); }
+    setApplyModal(job);
   };
 
   const goToPage = (p) => {
@@ -122,6 +118,14 @@ export default function StudentHome() {
 
   return (
     <div className="min-h-screen bg-black text-white">
+      {applyModal && (
+        <ApplyModal
+          jobId={applyModal.id}
+          jobTitle={applyModal.title}
+          onClose={() => setApplyModal(null)}
+          onSuccess={() => { setApplyModal(null); alert("Postulacion enviada exitosamente!"); }}
+        />
+      )}
       <SEO title="Buscar empleos" description="Encuentra cientos de empleos para estudiantes universitarios en El Salvador." />
       <Navbar />
       <div className="max-w-4xl mx-auto px-4 py-6 md:py-8">
@@ -263,7 +267,12 @@ export default function StudentHome() {
                       <div className="flex-1 min-w-0">
                         <h3 className="font-bold text-base group-hover:text-red-500 transition truncate">{job.title}</h3>
                         <div className="flex items-center gap-1.5">
-                          <p className="text-red-500 text-sm font-medium">{job.employer && job.employer.companyName}</p>
+                          <button
+                          onClick={e => { e.stopPropagation(); job.employer?.id && navigate("/employer/view/" + job.employer.id); }}
+                          className="text-red-500 text-sm font-medium hover:text-red-400 hover:underline transition text-left"
+                        >
+                          {job.employer && job.employer.companyName}
+                        </button>
                           {job.employer && job.employer.verified && (
                             <ShieldCheck size={14} className="text-green-400" title="Empresa verificada" />
                           )}
@@ -295,7 +304,7 @@ export default function StudentHome() {
                           </svg>
                         </button>
                         <button
-                          onClick={e => handleApply(e, job.id)}
+                          onClick={e => handleApply(e, job)}
                           disabled={applying === job.id}
                           className="bg-red-600 hover:bg-red-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition disabled:opacity-50"
                         >
