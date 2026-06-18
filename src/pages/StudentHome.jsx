@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { MapPin, Briefcase, Heart, Search, Clock, SlidersHorizontal, X, ChevronLeft, ChevronRight, ShieldCheck, Share2 } from "lucide-react";
 import Navbar from "../components/Navbar";
 import ApplyModal from "../components/ApplyModal";
+import ProfileCompletionBar from "../components/ProfileCompletionBar";
 import SEO from "../components/SEO";
 import api from "../api/client";
 import { useAuth } from "../context/AuthContext";
@@ -20,6 +21,7 @@ export default function StudentHome() {
   const [loading, setLoading] = useState(true);
   const [applying, setApplying] = useState(null);
   const [applyModal, setApplyModal] = useState(null);
+  const [profile, setProfile] = useState(null);
   const [showFilters, setShowFilters] = useState(false);
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
@@ -56,15 +58,14 @@ export default function StudentHome() {
   // Carga inicial
   useEffect(() => {
     fetchJobs(1);
-    // Verificar si necesita onboarding
-    const done = localStorage.getItem("onboardingDone_" + user?.userId);
-    if (!done) {
-      api.get("/student/profile").then(r => {
-        const p = r.data;
-        const incomplete = !p.firstName || !p.career || !p.desiredPosition;
+    api.get("/student/profile").then(r => {
+      setProfile(r.data);
+      const done = localStorage.getItem("onboardingDone_" + user?.userId);
+      if (!done) {
+        const incomplete = !r.data.firstName || !r.data.career || !r.data.desiredPosition;
         if (incomplete) navigate("/onboarding");
-      }).catch(() => {});
-    }
+      }
+    }).catch(() => {});
   }, []);
 
   // Debounce en busqueda de texto
@@ -129,6 +130,8 @@ export default function StudentHome() {
       <SEO title="Buscar empleos" description="Encuentra cientos de empleos para estudiantes universitarios en El Salvador." />
       <Navbar />
       <div className="max-w-4xl mx-auto px-4 py-6 md:py-8">
+
+        {profile && <ProfileCompletionBar profile={profile} />}
 
         {/* Busqueda */}
         <div className="flex flex-col md:flex-row gap-3 mb-4">

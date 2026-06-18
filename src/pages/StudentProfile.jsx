@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Camera, Upload, FileText, CheckCircle } from "lucide-react";
 import Navbar from "../components/Navbar";
+import ProfileCompletionBar from "../components/ProfileCompletionBar";
 import api from "../api/client";
 import { useAuth } from "../context/AuthContext";
 
@@ -133,6 +134,8 @@ export default function StudentProfile() {
             </button>
           </div>
         </div>
+
+        <ProfileCompletionBar profile={profile} />
 
         <div className="bg-gray-950 rounded-2xl border border-gray-800 p-8">
 
