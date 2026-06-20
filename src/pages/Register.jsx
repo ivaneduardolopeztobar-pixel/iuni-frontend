@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { CheckCircle, Mail, AlertTriangle } from "lucide-react";
+import { CheckCircle, Mail, AlertTriangle, GraduationCap, Briefcase } from "lucide-react";
 import api from "../api/client";
 
 export default function Register() {
@@ -64,10 +64,10 @@ export default function Register() {
 
   // Verificacion enviada
   if (verificationSent) return (
-    <div className="min-h-screen bg-black flex items-center justify-center p-4">
+    <div className="min-h-screen bg-black flex items-center justify-center p-4 relative overflow-hidden"><div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-red-600/10 rounded-full blur-3xl pointer-events-none" />
       <div className="w-full max-w-md text-center">
         <h1 className="text-5xl font-black text-white mb-8"><span className="text-red-600">i</span>UNI</h1>
-        <div className="bg-gray-950 rounded-2xl p-8 border border-gray-800">
+        <div className="bg-white/[0.03] rounded-2xl p-8 border border-white/10 shadow-2xl shadow-black/40 animate-fade-in">
           <div className="w-16 h-16 bg-green-900 rounded-full flex items-center justify-center mx-auto mb-4">
             <Mail size={32} className="text-green-400" />
           </div>
@@ -101,12 +101,12 @@ export default function Register() {
 
   // Solicitud de dominio
   if (domainRequest) return (
-    <div className="min-h-screen bg-black flex items-center justify-center p-4">
+    <div className="min-h-screen bg-black flex items-center justify-center p-4 relative overflow-hidden"><div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-red-600/10 rounded-full blur-3xl pointer-events-none" />
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <h1 className="text-5xl font-black text-white"><span className="text-red-600">i</span>UNI</h1>
         </div>
-        <div className="bg-gray-950 rounded-2xl p-8 border border-gray-800">
+        <div className="bg-white/[0.03] rounded-2xl p-8 border border-white/10 shadow-2xl shadow-black/40 animate-fade-in">
           {requestSent ? (
             <div className="text-center">
               <CheckCircle size={48} className="text-green-400 mx-auto mb-4" />
@@ -147,7 +147,7 @@ export default function Register() {
                   Dominio solicitado: <span className="text-white font-bold">@{domainRequest.domain}</span>
                 </div>
                 <button type="submit" disabled={loading}
-                  className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-xl transition disabled:opacity-50">
+                  className="w-full bg-red-600 hover:bg-red-500 text-white font-bold py-3.5 rounded-xl transition-all disabled:opacity-50 shadow-lg shadow-red-600/20 hover:-translate-y-0.5">
                   {loading ? "Enviando..." : "Solicitar agregar mi universidad"}
                 </button>
               </form>
@@ -163,20 +163,29 @@ export default function Register() {
 
   // Paso 1: seleccion de tipo
   if (step === 1) return (
-    <div className="min-h-screen bg-black flex items-center justify-center p-4">
-      <div className="w-full max-w-md text-center">
+    <div className="min-h-screen bg-black flex items-center justify-center p-4 relative overflow-hidden"><div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-red-600/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="w-full max-w-lg text-center relative animate-fade-in">
         <h1 className="text-6xl font-black text-white mb-2"><span className="text-red-600">i</span>UNI</h1>
-        <p className="text-gray-400 mb-12 text-sm">La red de empleo virtual para estudiantes</p>
-        <p className="text-2xl md:text-3xl font-black text-white mb-2">BUSCAS EMPLEO</p>
-        <p className="text-2xl md:text-3xl font-black text-white mb-10">O EMPLEADOS?</p>
-        <div className="flex gap-4 justify-center">
+        <p className="text-gray-500 mb-14 text-sm">La red de empleo virtual para estudiantes</p>
+        <h2 className="text-3xl md:text-4xl font-black text-white mb-10 leading-tight">
+          Buscas empleo<br/>o talento?
+        </h2>
+        <div className="grid grid-cols-2 gap-4">
           <button onClick={() => { setUserType("STUDENT"); setStep(2); }}
-            className="bg-red-600 hover:bg-red-700 text-white font-black px-8 py-3 rounded-full transition text-sm">
-            SOY ESTUDIANTE
+            className="group bg-white/[0.03] border border-white/10 hover:border-red-600/50 hover:bg-white/[0.05] rounded-2xl p-6 transition-all text-left">
+            <div className="w-11 h-11 bg-red-600 rounded-xl flex items-center justify-center mb-4 shadow-lg shadow-red-600/20 group-hover:-translate-y-0.5 transition-transform">
+              <GraduationCap size={20} className="text-white" />
+            </div>
+            <p className="font-black text-white text-base mb-1">Soy estudiante</p>
+            <p className="text-gray-500 text-xs">Busco mi primer empleo</p>
           </button>
           <button onClick={() => { setUserType("EMPLOYER"); setStep(2); }}
-            className="bg-red-600 hover:bg-red-700 text-white font-black px-8 py-3 rounded-full transition text-sm">
-            SOY EMPLEADOR
+            className="group bg-white/[0.03] border border-white/10 hover:border-red-600/50 hover:bg-white/[0.05] rounded-2xl p-6 transition-all text-left">
+            <div className="w-11 h-11 bg-red-600 rounded-xl flex items-center justify-center mb-4 shadow-lg shadow-red-600/20 group-hover:-translate-y-0.5 transition-transform">
+              <Briefcase size={20} className="text-white" />
+            </div>
+            <p className="font-black text-white text-base mb-1">Soy empleador</p>
+            <p className="text-gray-500 text-xs">Busco talento joven</p>
           </button>
         </div>
         {userType === "STUDENT" && (
@@ -194,7 +203,7 @@ export default function Register() {
 
   // Paso 2: formulario
   return (
-    <div className="min-h-screen bg-black flex items-center justify-center p-4">
+    <div className="min-h-screen bg-black flex items-center justify-center p-4 relative overflow-hidden"><div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-red-600/10 rounded-full blur-3xl pointer-events-none" />
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <h1 className="text-5xl font-black text-white"><span className="text-red-600">i</span>UNI</h1>
@@ -204,7 +213,7 @@ export default function Register() {
         </div>
 
         {userType === "STUDENT" && (
-          <div className="bg-blue-950 border border-blue-800 rounded-xl px-4 py-3 mb-4 flex items-start gap-2">
+          <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl px-4 py-3 mb-4 flex items-start gap-2 animate-slide-up">
             <Mail size={16} className="text-blue-400 shrink-0 mt-0.5" />
             <p className="text-blue-300 text-xs leading-relaxed">
               Usa tu correo institucional universitario.
@@ -213,7 +222,7 @@ export default function Register() {
           </div>
         )}
 
-        <div className="bg-gray-950 rounded-2xl p-8 border border-gray-800">
+        <div className="bg-white/[0.03] rounded-2xl p-8 border border-white/10 shadow-2xl shadow-black/40 animate-fade-in">
           <form onSubmit={handleSubmit} className="space-y-4">
             {userType === "STUDENT" ? (
               <>
@@ -236,7 +245,7 @@ export default function Register() {
             <div>
               <label className="text-gray-400 text-sm mb-1.5 block">Contrasena</label>
               <input type="password" value={form.password} onChange={e => setForm({...form, password: e.target.value})}
-                className="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-red-600 transition"
+                className="w-full bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-red-600/50 focus:bg-white/[0.06] transition-all"
                 required />
               {form.password && (
                 <div className="mt-2 space-y-1">
@@ -248,13 +257,13 @@ export default function Register() {
             </div>
 
             {error && (
-              <div className="bg-red-950 border border-red-800 rounded-xl px-4 py-3">
+              <div className="bg-red-500/10 border border-red-500/20 rounded-xl px-4 py-3 animate-slide-up">
                 <p className="text-red-400 text-sm">{error}</p>
               </div>
             )}
 
             <button type="submit" disabled={loading}
-              className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-xl transition disabled:opacity-50">
+              className="w-full bg-red-600 hover:bg-red-500 text-white font-bold py-3.5 rounded-xl transition-all disabled:opacity-50 shadow-lg shadow-red-600/20 hover:-translate-y-0.5">
               {loading ? "Creando cuenta..." : "Continuar"}
             </button>
           </form>
@@ -272,7 +281,7 @@ function Field({ label, type = "text", value, onChange, placeholder }) {
     <div>
       <label className="text-gray-400 text-sm mb-1.5 block">{label}</label>
       <input type={type} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder}
-        className="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-red-600 transition"
+        className="w-full bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-red-600/50 focus:bg-white/[0.06] transition-all"
         required />
     </div>
   );
