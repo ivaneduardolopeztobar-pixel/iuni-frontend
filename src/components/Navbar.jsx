@@ -68,7 +68,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="bg-black text-white px-4 md:px-6 py-3 flex items-center justify-between shadow-lg sticky top-0 z-50 border-b border-gray-900">
+      <nav className="bg-black/90 backdrop-blur-lg text-white px-4 md:px-6 py-3.5 flex items-center justify-between sticky top-0 z-50 border-b border-white/5">
         <Link to="/" className="text-2xl font-black tracking-tight select-none">
           <span className="text-red-600">i</span>UNI
         </Link>
@@ -95,7 +95,7 @@ export default function Navbar() {
             </button>
 
             {notifOpen && (
-              <div className="absolute right-0 top-10 bg-gray-950 border border-gray-800 rounded-xl shadow-2xl w-72 md:w-80 z-50">
+              <div className="absolute right-0 top-11 bg-[#0a0a0a] border border-white/10 rounded-2xl shadow-2xl shadow-black/50 w-72 md:w-80 z-50 animate-slide-up overflow-hidden">
                 <div className="flex items-center justify-between px-4 py-3 border-b border-gray-800">
                   <h3 className="font-bold text-sm">Notificaciones</h3>
                   <div className="flex gap-2">
@@ -133,7 +133,7 @@ export default function Navbar() {
           {/* Desktop user menu */}
           <div className="relative hidden md:block">
             <button onClick={() => { setMenuOpen(!menuOpen); setNotifOpen(false); }} className="flex items-center gap-2 hover:text-red-500 transition">
-              <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-red-600 shrink-0">
+              <div className="w-8 h-8 rounded-full overflow-hidden ring-2 ring-white/10 hover:ring-red-600/50 transition-all shrink-0">
                 {user && user.photoPath ? (
                   <img src={user.photoPath} alt="foto" className="w-full h-full object-cover" />
                 ) : (
@@ -145,7 +145,7 @@ export default function Navbar() {
               <ChevronDown size={14} className="text-gray-400" />
             </button>
             {menuOpen && (
-              <div className="absolute right-0 top-11 bg-gray-950 border border-gray-800 rounded-xl shadow-2xl w-52 py-2 z-50">
+              <div className="absolute right-0 top-12 bg-[#0a0a0a] border border-white/10 rounded-2xl shadow-2xl shadow-black/50 w-52 py-2 z-50 animate-slide-up overflow-hidden">
                 {user && user.userType === "STUDENT" ? (
                   <>
                     <MenuItem to="/student/profile" icon={<FileText size={14}/>} label="Mi CV" close={closeAll} />
@@ -182,8 +182,8 @@ export default function Navbar() {
 
       {/* Mobile menu drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden fixed inset-0 z-40 bg-black bg-opacity-80" onClick={closeAll}>
-          <div className="absolute right-0 top-0 h-full w-72 bg-gray-950 border-l border-gray-800 p-6" onClick={e => e.stopPropagation()}>
+        <div className="md:hidden fixed inset-0 z-40 bg-black/70 backdrop-blur-sm animate-fade-in" onClick={closeAll}>
+          <div className="absolute right-0 top-0 h-full w-72 bg-[#0a0a0a] border-l border-white/10 p-6 animate-slide-up" onClick={e => e.stopPropagation()}>
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-lg font-black"><span className="text-red-600">i</span>UNI</h2>
               <button onClick={closeAll}><X size={20} className="text-gray-400" /></button>
@@ -221,7 +221,7 @@ export default function Navbar() {
 
 function MenuItem({ to, icon, label, close }) {
   return (
-    <Link to={to} onClick={close} className="flex items-center gap-2 px-4 py-2 text-sm text-gray-300 hover:bg-gray-900 hover:text-white transition">
+    <Link to={to} onClick={close} className="flex items-center gap-2.5 px-4 py-2.5 text-sm text-gray-400 hover:bg-white/5 hover:text-white transition-all">
       {icon} {label}
     </Link>
   );
@@ -229,7 +229,7 @@ function MenuItem({ to, icon, label, close }) {
 
 function MobileItem({ to, icon, label, close }) {
   return (
-    <Link to={to} onClick={close} className="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-300 hover:bg-gray-900 hover:text-white transition">
+    <Link to={to} onClick={close} className="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:bg-white/5 hover:text-white transition-all">
       <span className="text-red-500">{icon}</span>
       <span className="font-medium">{label}</span>
     </Link>

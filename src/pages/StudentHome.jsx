@@ -30,6 +30,23 @@ export default function StudentHome() {
   const debounceRef = useRef(null);
   const navigate = useNavigate();
 
+  const saveSearchHistory = (term) => {
+    if (!term || term.trim().length < 2) return;
+    const key = "iuni_search_history";
+    let history = JSON.parse(localStorage.getItem(key) || "[]");
+    history = history.filter(h => h.toLowerCase() !== term.toLowerCase());
+    history.unshift(term);
+    history = history.slice(0, 5);
+    localStorage.setItem(key, JSON.stringify(history));
+  };
+
+  const getSearchHistory = () => {
+    return JSON.parse(localStorage.getItem("iuni_search_history") || "[]");
+  };
+
+  const [searchHistory, setSearchHistory] = useState(getSearchHistory());
+  const [showHistory, setShowHistory] = useState(false);
+
   const fetchJobs = async (p = 1, s = search, l = location, jt = jobType) => {
     setLoading(true);
     setServerError(false);
@@ -135,7 +152,7 @@ export default function StudentHome() {
 
         {/* Busqueda */}
         <div className="flex flex-col md:flex-row gap-3 mb-4">
-          <div className="flex items-center gap-2 bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 flex-1">
+          <div className="flex items-center gap-2 bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 flex-1 hover:border-white/20 focus-within:border-red-600/50 transition-all">
             <MapPin size={16} className="text-gray-600 shrink-0" />
             <input
               className="bg-transparent text-sm text-white placeholder-gray-600 focus:outline-none flex-1 w-full"
@@ -149,23 +166,44 @@ export default function StudentHome() {
               </button>
             )}
           </div>
-          <div className="flex items-center gap-2 bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 flex-1">
-            <Briefcase size={16} className="text-gray-600 shrink-0" />
-            <input
-              className="bg-transparent text-sm text-white placeholder-gray-600 focus:outline-none flex-1 w-full"
-              placeholder="Puesto/Cargo/Categoria"
-              value={search}
-              onChange={e => handleSearchChange(e.target.value, "search")}
-            />
-            {search && (
-              <button onClick={() => { setSearch(""); fetchJobs(1, "", location, jobType); }}>
-                <X size={14} className="text-gray-600 hover:text-white transition" />
-              </button>
+          <div className="relative flex-1">
+            <div className="flex items-center gap-2 bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 hover:border-white/20 focus-within:border-red-600/50 transition-all">
+              <Briefcase size={16} className="text-gray-600 shrink-0" />
+              <input
+                className="bg-transparent text-sm text-white placeholder-gray-600 focus:outline-none flex-1 w-full"
+                placeholder="Puesto/Cargo/Categoria"
+                value={search}
+                onChange={e => handleSearchChange(e.target.value, "search")}
+                onFocus={() => setShowHistory(true)}
+                onBlur={() => setTimeout(() => setShowHistory(false), 150)}
+                onKeyDown={e => { if (e.key === "Enter") { saveSearchHistory(search); setSearchHistory(getSearchHistory()); } }}
+              />
+              {search && (
+                <button onClick={() => { setSearch(""); fetchJobs(1, "", location, jobType); }}>
+                  <X size={14} className="text-gray-600 hover:text-white transition" />
+                </button>
+              )}
+            </div>
+            {showHistory && searchHistory.length > 0 && !search && (
+              <div className="absolute left-0 top-full mt-1 w-full bg-gray-950 border border-gray-800 rounded-xl shadow-2xl z-30 overflow-hidden">
+                <div className="px-4 py-2 border-b border-gray-900">
+                  <p className="text-gray-600 text-xs font-bold">Busquedas recientes</p>
+                </div>
+                {searchHistory.map((term, i) => (
+                  <button
+                    key={i}
+                    onClick={() => { setSearch(term); setShowHistory(false); fetchJobs(1, term, location, jobType); }}
+                    className="w-full text-left px-4 py-2.5 text-sm text-gray-300 hover:bg-gray-900 hover:text-white transition flex items-center gap-2"
+                  >
+                    <Clock size={12} className="text-gray-600 shrink-0" /> {term}
+                  </button>
+                ))}
+              </div>
             )}
           </div>
           <button
-            onClick={() => fetchJobs(1)}
-            className="bg-red-600 hover:bg-red-700 px-6 py-3 rounded-xl font-bold transition flex items-center justify-center gap-2 text-sm w-full md:w-auto"
+            onClick={() => { saveSearchHistory(search); setSearchHistory(getSearchHistory()); fetchJobs(1); }}
+            className="bg-red-600 hover:bg-red-500 px-6 py-3 rounded-xl font-bold transition-all flex items-center justify-center gap-2 text-sm w-full md:w-auto shadow-lg shadow-red-600/20"
           >
             <Search size={16} /> Buscar
           </button>
@@ -181,7 +219,7 @@ export default function StudentHome() {
 
         {/* Panel filtros */}
         {showFilters && (
-          <div className="bg-gray-950 border border-gray-800 rounded-xl p-5 mb-4">
+          <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-5 mb-4 animate-slide-up">
             <div className="flex items-center justify-between mb-4">
               <h3 className="font-bold text-sm">Filtros</h3>
               {hasFilters && (
@@ -198,7 +236,7 @@ export default function StudentHome() {
                     key={t}
                     onClick={() => handleJobTypeChange(t)}
                     className={"px-3 py-1.5 rounded-lg text-xs font-medium transition border " +
-                      (jobType === t ? "bg-red-600 border-red-600 text-white" : "border-gray-700 text-gray-400 hover:text-white hover:border-gray-500")}
+                      (jobType === t ? "bg-red-600 border-red-600 text-white shadow-md shadow-red-600/20" : "border-white/10 text-gray-400 hover:text-white hover:border-white/30")}
                   >
                     {t}
                   </button>
@@ -250,12 +288,12 @@ export default function StudentHome() {
             <div className="flex flex-col gap-3">
               {(loading ? Array(3).fill(null) : jobs).map((job, idx) => (
                 job === null ? (
-                  <div key={idx} className="bg-gray-950 border border-gray-900 rounded-xl p-5 animate-pulse h-28" />
+                  <div key={idx} className="bg-white/[0.03] border border-white/5 rounded-2xl p-5 animate-pulse h-28" />
                 ) : (
                   <div
                     key={job.id}
                     onClick={() => navigate("/jobs/" + job.id)}
-                    className="bg-gray-950 border border-gray-800 rounded-xl p-5 hover:border-red-600 cursor-pointer transition group"
+                    className="bg-white/[0.03] border border-white/10 rounded-2xl p-5 hover:border-red-600/40 hover:bg-white/[0.05] cursor-pointer transition-all group"
                   >
                     <div className="flex items-start gap-4">
                       <div className="w-10 h-10 rounded-lg shrink-0 overflow-hidden bg-red-600 flex items-center justify-center">
@@ -326,7 +364,7 @@ export default function StudentHome() {
                 <button
                   onClick={() => goToPage(page - 1)}
                   disabled={page === 1}
-                  className="p-2 rounded-xl border border-gray-700 text-gray-400 hover:text-white hover:border-gray-500 transition disabled:opacity-30 disabled:cursor-not-allowed"
+                  className="p-2 rounded-xl border border-white/10 text-gray-400 hover:text-white hover:border-white/30 transition-all disabled:opacity-30 disabled:cursor-not-allowed"
                 >
                   <ChevronLeft size={18} />
                 </button>
@@ -345,7 +383,7 @@ export default function StudentHome() {
                       key={p}
                       onClick={() => goToPage(p)}
                       className={"w-9 h-9 rounded-xl text-sm font-bold transition border " +
-                        (p === page ? "bg-red-600 border-red-600 text-white" : "border-gray-700 text-gray-400 hover:text-white hover:border-gray-500")}
+                        (p === page ? "bg-red-600 border-red-600 text-white shadow-md shadow-red-600/20" : "border-white/10 text-gray-400 hover:text-white hover:border-white/30")}
                     >
                       {p}
                     </button>
@@ -355,7 +393,7 @@ export default function StudentHome() {
                 <button
                   onClick={() => goToPage(page + 1)}
                   disabled={page === totalPages}
-                  className="p-2 rounded-xl border border-gray-700 text-gray-400 hover:text-white hover:border-gray-500 transition disabled:opacity-30 disabled:cursor-not-allowed"
+                  className="p-2 rounded-xl border border-white/10 text-gray-400 hover:text-white hover:border-white/30 transition-all disabled:opacity-30 disabled:cursor-not-allowed"
                 >
                   <ChevronRight size={18} />
                 </button>

@@ -75,7 +75,7 @@ export default function JobDetail() {
           <ArrowLeft size={16} /> Volver
         </button>
 
-        <div className="bg-gray-950 border border-gray-800 rounded-2xl p-8">
+        <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-6 md:p-8 animate-fade-in">
           <div className="flex items-start gap-4 mb-6">
             <div className="w-14 h-14 rounded-xl shrink-0 overflow-hidden bg-red-600 flex items-center justify-center">
               {job && job.employer && job.employer.photoPath ? (
@@ -120,7 +120,7 @@ export default function JobDetail() {
             {job?.studentBenefits && <Section title="Beneficios estudiantiles" content={job.studentBenefits} />}
           </div>
 
-          <div className="mt-8 pt-6 border-t border-gray-800">
+          <div className="mt-8 pt-6 border-t border-white/10">
             {/* Share */}
             <div className="relative mb-4">
               <button
@@ -130,7 +130,7 @@ export default function JobDetail() {
                 <Share2 size={16} /> Compartir oferta
               </button>
               {showShare && (
-                <div className="absolute left-0 top-8 bg-gray-900 border border-gray-800 rounded-xl shadow-2xl p-3 z-20 flex gap-2">
+                <div className="absolute left-0 top-8 bg-[#0a0a0a] border border-white/10 rounded-xl shadow-2xl shadow-black/50 p-3 z-20 flex gap-2 animate-slide-up">
                   <button
                     onClick={shareWhatsApp}
                     className="flex items-center gap-2 bg-green-700 hover:bg-green-600 text-white text-xs font-bold px-4 py-2 rounded-lg transition"
@@ -145,7 +145,7 @@ export default function JobDetail() {
                   </button>
                   <button
                     onClick={copyLink}
-                    className="flex items-center gap-2 bg-gray-700 hover:bg-gray-600 text-white text-xs font-bold px-4 py-2 rounded-lg transition"
+                    className="flex items-center gap-2 bg-white/10 hover:bg-white/15 text-white text-xs font-bold px-4 py-2 rounded-lg transition-all"
                   >
                     {copied ? <CheckCircle size={14} className="text-green-400" /> : <Copy size={14} />}
                     {copied ? "Copiado" : "Copiar link"}
@@ -161,7 +161,7 @@ export default function JobDetail() {
             <button
               onClick={handleApply}
               disabled={applying}
-              className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-3 rounded-xl transition disabled:opacity-50 w-full md:w-auto"
+              className="bg-red-600 hover:bg-red-500 text-white font-bold px-8 py-3.5 rounded-xl transition-all disabled:opacity-50 w-full md:w-auto shadow-lg shadow-red-600/25 hover:-translate-y-0.5"
             >
               {applying ? 'Enviando...' : 'Postularme ahora'}
             </button>
@@ -175,10 +175,10 @@ export default function JobDetail() {
 
 function Tag({ icon, label, color = 'default' }) {
   const cls = color === 'green'
-    ? 'bg-green-950 text-green-400 border-green-900'
-    : 'bg-gray-900 text-gray-300 border-gray-800';
+    ? 'bg-green-500/10 text-green-400 border-green-500/20'
+    : 'bg-white/5 text-gray-300 border-white/10';
   return (
-    <span className={`flex items-center gap-1.5 border ${cls} px-3 py-1 rounded-full text-xs font-medium`}>
+    <span className={`flex items-center gap-1.5 border ${cls} px-3 py-1.5 rounded-full text-xs font-medium`}>
       {icon}{label}
     </span>
   );
