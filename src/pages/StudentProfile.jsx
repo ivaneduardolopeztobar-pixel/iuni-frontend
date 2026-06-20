@@ -121,14 +121,14 @@ export default function StudentProfile() {
           <h1 className="text-2xl font-black">Mi CV</h1>
           <div className="flex gap-2">
             {editing && (
-              <button onClick={() => setEditing(false)} className="px-4 py-2 rounded-xl border border-gray-700 text-gray-400 hover:text-white text-sm transition">
+              <button onClick={() => setEditing(false)} className="px-4 py-2 rounded-xl border border-white/10 text-gray-400 hover:text-white hover:border-white/30 text-sm transition-all">
                 Cancelar
               </button>
             )}
             <button
               onClick={() => editing ? handleSave() : setEditing(true)}
               disabled={saving}
-              className="bg-red-600 hover:bg-red-700 text-white font-bold px-5 py-2 rounded-xl transition text-sm disabled:opacity-50"
+              className="bg-red-600 hover:bg-red-500 text-white font-bold px-5 py-2.5 rounded-xl transition-all text-sm disabled:opacity-50 shadow-lg shadow-red-600/20"
             >
               {saving ? "Guardando..." : editing ? "Guardar cambios" : "Editar perfil"}
             </button>
@@ -137,7 +137,7 @@ export default function StudentProfile() {
 
         <ProfileCompletionBar profile={profile} />
 
-        <div className="bg-gray-950 rounded-2xl border border-gray-800 p-8">
+        <div className="bg-white/[0.03] rounded-2xl border border-white/10 p-6 md:p-8 animate-fade-in">
 
           <div className="flex items-center gap-6 mb-8">
             <div className="relative">
@@ -152,7 +152,7 @@ export default function StudentProfile() {
               <button
                 onClick={() => photoRef.current.click()}
                 disabled={uploadingPhoto}
-                className="absolute -bottom-1 -right-1 w-7 h-7 bg-gray-800 border border-gray-600 rounded-full flex items-center justify-center hover:bg-gray-700 transition"
+                className="absolute -bottom-1 -right-1 w-7 h-7 bg-[#111] border border-white/20 rounded-full flex items-center justify-center hover:bg-white/10 hover:border-red-600/50 transition-all"
               >
                 {uploadingPhoto
                   ? <div className="w-3 h-3 border border-white border-t-transparent rounded-full animate-spin" />
@@ -174,7 +174,7 @@ export default function StudentProfile() {
             </div>
           </div>
 
-          <div className="mb-6 p-4 bg-gray-900 rounded-xl border border-gray-800">
+          <div className="mb-6 p-4 bg-white/[0.03] rounded-xl border border-white/10">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <FileText size={20} className="text-red-500" />
@@ -188,14 +188,14 @@ export default function StudentProfile() {
               <div className="flex gap-2">
                 {cvUrl && (
                   <a href={cvUrl} target="_blank" rel="noreferrer"
-                    className="text-xs px-3 py-1.5 rounded-lg border border-gray-700 text-gray-300 hover:text-white transition">
+                    className="text-xs px-3 py-1.5 rounded-lg border border-white/10 text-gray-300 hover:text-white hover:border-white/30 transition-all">
                     Ver CV
                   </a>
                 )}
                 <button
                   onClick={() => cvRef.current.click()}
                   disabled={uploadingCV}
-                  className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg bg-red-600 hover:bg-red-700 text-white font-bold transition disabled:opacity-50"
+                  className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg bg-red-600 hover:bg-red-500 text-white font-bold transition-all disabled:opacity-50 shadow-md shadow-red-600/20"
                 >
                   {uploadingCV
                     ? <div className="w-3 h-3 border border-white border-t-transparent rounded-full animate-spin" />
@@ -216,7 +216,7 @@ export default function StudentProfile() {
                   <input
                     value={form[k] || ""}
                     onChange={e => setForm({...form, [k]: e.target.value})}
-                    className="w-full bg-gray-900 border border-gray-700 rounded-xl px-3 py-2 text-white text-sm focus:outline-none focus:border-red-600 transition"
+                    className="w-full bg-white/[0.04] border border-white/10 rounded-xl px-3 py-2.5 text-white text-sm placeholder-gray-600 focus:outline-none focus:border-red-600/50 focus:bg-white/[0.06] transition-all"
                   />
                 </div>
               ))}
@@ -226,7 +226,7 @@ export default function StudentProfile() {
                   value={form.profileDescription || ""}
                   onChange={e => setForm({...form, profileDescription: e.target.value})}
                   rows={3}
-                  className="w-full bg-gray-900 border border-gray-700 rounded-xl px-3 py-2 text-white text-sm focus:outline-none focus:border-red-600 transition resize-none"
+                  className="w-full bg-white/[0.04] border border-white/10 rounded-xl px-3 py-2.5 text-white text-sm placeholder-gray-600 focus:outline-none focus:border-red-600/50 focus:bg-white/[0.06] transition-all resize-none"
                 />
               </div>
             </div>
