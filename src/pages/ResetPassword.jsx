@@ -43,7 +43,8 @@ export default function ResetPassword() {
   };
 
   return (
-    <div className="min-h-screen bg-black flex items-center justify-center p-4">
+    <div className="min-h-screen bg-black flex items-center justify-center p-4 relative overflow-hidden">
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-red-600/10 rounded-full blur-3xl pointer-events-none" />
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <h1 className="text-5xl font-black text-white">
@@ -51,7 +52,7 @@ export default function ResetPassword() {
           </h1>
         </div>
 
-        <div className="bg-gray-950 rounded-2xl p-8 border border-gray-800">
+        <div className="bg-[#0a0a0a] rounded-2xl p-8 border border-white/10">
           {done ? (
             <div className="text-center">
               <div className="w-16 h-16 bg-green-900 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -71,7 +72,7 @@ export default function ResetPassword() {
                     type="password"
                     value={password}
                     onChange={e => setPassword(e.target.value)}
-                    className="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-red-600 transition"
+                    className="w-full bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-red-600 transition"
                     placeholder="Minimo 8 caracteres"
                     required
                   />
@@ -89,7 +90,7 @@ export default function ResetPassword() {
                     type="password"
                     value={confirm}
                     onChange={e => setConfirm(e.target.value)}
-                    className="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-red-600 transition"
+                    className="w-full bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-red-600 transition"
                     placeholder="Repite la contraseña"
                     required
                   />
@@ -108,7 +109,7 @@ export default function ResetPassword() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-xl transition disabled:opacity-50"
+                  className="w-full bg-red-600 hover:bg-red-500 text-white font-bold py-3 rounded-xl transition disabled:opacity-50"
                 >
                   {loading ? "Guardando..." : "Guardar nueva contraseña"}
                 </button>

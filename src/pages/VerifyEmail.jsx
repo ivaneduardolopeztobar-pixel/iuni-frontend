@@ -28,12 +28,13 @@ export default function VerifyEmail() {
   }, [token]);
 
   return (
-    <div className="min-h-screen bg-black flex items-center justify-center p-4">
+    <div className="min-h-screen bg-black flex items-center justify-center p-4 relative overflow-hidden">
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-red-600/10 rounded-full blur-3xl pointer-events-none" />
       <div className="w-full max-w-md text-center">
         <h1 className="text-5xl font-black text-white mb-8">
           <span className="text-red-600">i</span>UNI
         </h1>
-        <div className="bg-gray-950 rounded-2xl p-8 border border-gray-800">
+        <div className="bg-[#0a0a0a] rounded-2xl p-8 border border-white/10">
           {status === "loading" && (
             <>
               <Loader size={48} className="text-red-500 mx-auto mb-4 animate-spin" />
@@ -48,7 +49,7 @@ export default function VerifyEmail() {
               </div>
               <h2 className="text-xl font-bold mb-2">Correo verificado</h2>
               <p className="text-gray-400 text-sm mb-2">Tu cuenta esta lista. Redirigiendo...</p>
-              <div className="w-full bg-gray-900 rounded-full h-1 mt-4">
+              <div className="w-full bg-white/[0.04] rounded-full h-1 mt-4">
                 <div className="bg-green-500 h-1 rounded-full animate-pulse w-full" />
               </div>
             </>
@@ -60,7 +61,7 @@ export default function VerifyEmail() {
               </div>
               <h2 className="text-xl font-bold mb-2">Error de verificación</h2>
               <p className="text-gray-400 text-sm mb-6">{error}</p>
-              <Link to="/login" className="bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-2.5 rounded-xl transition text-sm">
+              <Link to="/login" className="bg-red-600 hover:bg-red-500 text-white font-bold px-6 py-2.5 rounded-xl transition text-sm">
                 Ir al login
               </Link>
             </>
