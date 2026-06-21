@@ -56,7 +56,7 @@ export default function EmployerMetrics() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
 
           {/* Grafica de ultimos 7 dias */}
-          <div className="bg-gray-950 border border-gray-800 rounded-2xl p-6">
+          <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-6">
             <h3 className="font-bold mb-6 flex items-center gap-2">
               <TrendingUp size={16} className="text-red-500" /> Postulaciones ultimos 7 dias
             </h3>
@@ -75,7 +75,7 @@ export default function EmployerMetrics() {
           </div>
 
           {/* Postulaciones por estado */}
-          <div className="bg-gray-950 border border-gray-800 rounded-2xl p-6">
+          <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-6">
             <h3 className="font-bold mb-4 flex items-center gap-2">
               <CheckCircle size={16} className="text-red-500" /> Estado de postulaciones
             </h3>
@@ -84,7 +84,7 @@ export default function EmployerMetrics() {
             ) : (
               <div className="space-y-3">
                 {data.applicationsByStatus.map(s => {
-                  const cfg = STATUS_LABELS[s.status] || { label: s.status, color: "bg-gray-900 text-gray-400 border-gray-800" };
+                  const cfg = STATUS_LABELS[s.status] || { label: s.status, color: "bg-white/[0.04] text-gray-400 border-white/10" };
                   const pct = data.summary.totalApplications > 0
                     ? Math.round(s._count.status / data.summary.totalApplications * 100)
                     : 0;
@@ -94,7 +94,7 @@ export default function EmployerMetrics() {
                         <span className={"text-xs font-bold px-2 py-0.5 rounded-full border " + cfg.color}>{cfg.label}</span>
                         <span className="text-sm font-bold">{s._count.status} <span className="text-gray-600 font-normal">({pct}%)</span></span>
                       </div>
-                      <div className="w-full bg-gray-900 rounded-full h-1.5">
+                      <div className="w-full bg-white/[0.04] rounded-full h-1.5">
                         <div className="bg-red-600 h-1.5 rounded-full transition-all" style={{ width: pct + "%" }} />
                       </div>
                     </div>
@@ -106,7 +106,7 @@ export default function EmployerMetrics() {
         </div>
 
         {/* Top empleos */}
-        <div className="bg-gray-950 border border-gray-800 rounded-2xl p-6">
+        <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-6">
           <h3 className="font-bold mb-4 flex items-center gap-2">
             <Star size={16} className="text-red-500" /> Tus mejores ofertas
           </h3>
@@ -115,7 +115,7 @@ export default function EmployerMetrics() {
           ) : (
             <div className="space-y-3">
               {data.topJobs.map((job, i) => (
-                <div key={job.id} className="flex items-center gap-4 p-4 bg-gray-900 rounded-xl border border-gray-800">
+                <div key={job.id} className="flex items-center gap-4 p-4 bg-white/[0.04] rounded-xl border border-white/10">
                   <span className="text-2xl font-black text-gray-700 w-8 text-center">#{i+1}</span>
                   <div className="flex-1 min-w-0">
                     <p className="font-bold truncate">{job.title}</p>
@@ -154,7 +154,7 @@ function SummaryCard({ icon, label, value, color }) {
     purple: "text-purple-400", yellow: "text-yellow-400"
   };
   return (
-    <div className="bg-gray-950 border border-gray-800 rounded-2xl p-4 text-center">
+    <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-4 text-center">
       <div className={"flex justify-center mb-2 " + colors[color]}>{icon}</div>
       <p className="text-2xl font-black">{value}</p>
       <p className="text-xs text-gray-500 mt-1 leading-tight">{label}</p>

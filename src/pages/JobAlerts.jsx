@@ -59,10 +59,10 @@ export default function JobAlerts() {
           </div>
         </div>
 
-        <div className="bg-gray-950 rounded-2xl border border-gray-800 p-8 space-y-6">
+        <div className="bg-white/[0.03] rounded-2xl border border-white/10 p-8 space-y-6">
 
           {/* Toggle activo */}
-          <div className="flex items-center justify-between p-4 bg-gray-900 rounded-xl border border-gray-800">
+          <div className="flex items-center justify-between p-4 bg-white/[0.04] rounded-xl border border-white/10">
             <div className="flex items-center gap-3">
               {alert.active
                 ? <Bell size={20} className="text-red-500" />
@@ -91,7 +91,7 @@ export default function JobAlerts() {
                 value={alert.keywords || ""}
                 onChange={e => setAlert(a => ({ ...a, keywords: e.target.value }))}
                 placeholder="Ej: desarrollador, diseñador, QA..."
-                className="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white text-sm placeholder-gray-600 focus:outline-none focus:border-red-600 transition"
+                className="w-full bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder-gray-600 focus:outline-none focus:border-red-600 transition"
               />
               <p className="text-gray-600 text-xs mt-1">Busca en el titulo y descripcion del empleo</p>
             </div>
@@ -101,7 +101,7 @@ export default function JobAlerts() {
               <select
                 value={alert.jobType || ""}
                 onChange={e => setAlert(a => ({ ...a, jobType: e.target.value }))}
-                className="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-red-600 transition"
+                className="w-full bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-red-600 transition"
               >
                 <option value="">Cualquier tipo</option>
                 {JOB_TYPES.filter(t => t).map(t => <option key={t}>{t}</option>)}
@@ -114,13 +114,13 @@ export default function JobAlerts() {
                 value={alert.city || ""}
                 onChange={e => setAlert(a => ({ ...a, city: e.target.value }))}
                 placeholder="Ej: San Salvador, Santa Ana..."
-                className="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white text-sm placeholder-gray-600 focus:outline-none focus:border-red-600 transition"
+                className="w-full bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder-gray-600 focus:outline-none focus:border-red-600 transition"
               />
             </div>
           </div>
 
           {/* Preview */}
-          <div className="p-4 bg-gray-900 rounded-xl border border-gray-800">
+          <div className="p-4 bg-white/[0.04] rounded-xl border border-white/10">
             <p className="text-xs text-gray-500 mb-2 font-medium">RECIBIRIAS ALERTAS DE:</p>
             <p className="text-sm text-gray-300">
               {alert.keywords ? ("Empleos con " + alert.keywords) : "Todos los empleos"}
@@ -132,7 +132,7 @@ export default function JobAlerts() {
           <button
             onClick={handleSave}
             disabled={saving}
-            className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-xl transition disabled:opacity-50"
+            className="w-full bg-red-600 hover:bg-red-500 text-white font-bold py-3 rounded-xl transition disabled:opacity-50"
           >
             {saving ? "Guardando..." : "Guardar configuracion"}
           </button>
