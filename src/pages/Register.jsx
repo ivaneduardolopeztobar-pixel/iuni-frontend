@@ -71,7 +71,7 @@ export default function Register() {
           <div className="w-16 h-16 bg-green-900 rounded-full flex items-center justify-center mx-auto mb-4">
             <Mail size={32} className="text-green-400" />
           </div>
-          <h2 className="text-xl font-bold mb-2">Revisa tu correo institucional</h2>
+          <h2 className="text-xl font-bold mb-2 text-white">Revisa tu correo institucional</h2>
           <p className="text-gray-400 text-sm mb-2">
             Enviamos un enlace de verificación a:
           </p>
@@ -110,7 +110,7 @@ export default function Register() {
           {requestSent ? (
             <div className="text-center">
               <CheckCircle size={48} className="text-green-400 mx-auto mb-4" />
-              <h2 className="text-xl font-bold mb-2">Solicitud enviada</h2>
+              <h2 className="text-xl font-bold mb-2 text-white">Solicitud enviada</h2>
               <p className="text-gray-400 text-sm mb-6">
                 Revisaremos tu solicitud y agregaremos tu universidad pronto.
                 Te notificaremos al email que proporcionaste.
@@ -124,7 +124,7 @@ export default function Register() {
               <div className="flex items-center gap-3 mb-6">
                 <AlertTriangle size={24} className="text-yellow-500 shrink-0" />
                 <div>
-                  <h2 className="font-bold">Universidad no registrada</h2>
+                  <h2 className="font-bold text-white">Universidad no registrada</h2>
                   <p className="text-gray-500 text-sm">El dominio @{domainRequest.domain} no esta en nuestra lista</p>
                 </div>
               </div>

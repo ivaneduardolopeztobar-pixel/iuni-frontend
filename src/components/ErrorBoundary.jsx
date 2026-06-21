@@ -26,7 +26,7 @@ export default class ErrorBoundary extends Component {
               <div className="w-16 h-16 bg-red-950 border border-red-800 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-red-500 text-2xl font-black">!</span>
               </div>
-              <h2 className="text-xl font-bold mb-2">Algo salio mal</h2>
+              <h2 className="text-xl font-bold mb-2 text-white">Algo salio mal</h2>
               <p className="text-gray-400 text-sm mb-6">
                 Ocurrio un error inesperado. Por favor recarga la pagina o vuelve al inicio.
               </p>

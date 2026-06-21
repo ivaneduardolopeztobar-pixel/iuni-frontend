@@ -120,7 +120,7 @@ export default function EmployerProfile() {
               <input ref={logoRef} type="file" accept="image/*" className="hidden" onChange={handleLogoUpload} />
             </div>
             <div>
-              <h2 className="text-xl font-bold">{form.companyName}</h2>
+              <h2 className="text-xl font-bold text-white">{form.companyName}</h2>
               <p className="text-gray-500 text-sm">{form.user && form.user.email}</p>
               {form.sector && <p className="text-red-500 text-sm mt-0.5">{form.sector}</p>}
             </div>

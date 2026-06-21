@@ -102,7 +102,7 @@ export default function EmployerPublicProfile() {
 
         {/* Ofertas activas */}
         <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-6 animate-slide-up">
-          <h2 className="font-black text-lg mb-4 flex items-center gap-2">
+          <h2 className="font-black text-lg mb-4 flex items-center gap-2 text-white">
             <Briefcase size={18} className="text-red-500" />
             Ofertas activas ({employer.jobPosts?.length || 0})
           </h2>

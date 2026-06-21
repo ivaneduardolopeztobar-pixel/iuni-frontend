@@ -174,7 +174,7 @@ export default function Onboarding() {
           {step === 1 && (
             <div className="space-y-5">
               <div>
-                <h2 className="text-xl font-black mb-1">Información basica</h2>
+                <h2 className="text-xl font-black mb-1 text-white">Información basica</h2>
                 <p className="text-gray-500 text-sm">Las empresas veran esta información en tu perfil</p>
               </div>
               <div className="grid grid-cols-2 gap-4">
@@ -199,7 +199,7 @@ export default function Onboarding() {
           {step === 2 && (
             <div className="space-y-5">
               <div>
-                <h2 className="text-xl font-black mb-1">Perfil academico</h2>
+                <h2 className="text-xl font-black mb-1 text-white">Perfil academico</h2>
                 <p className="text-gray-500 text-sm">Información sobre tu carrera y habilidades</p>
               </div>
               <Field label="Carrera *" value={form.career} onChange={v => set("career", v)} placeholder="Ingenieria en Desarrollo de Software" />
@@ -213,7 +213,7 @@ export default function Onboarding() {
           {step === 3 && (
             <div className="space-y-6">
               <div>
-                <h2 className="text-xl font-black mb-1">Tu Curriculum Vitae</h2>
+                <h2 className="text-xl font-black mb-1 text-white">Tu Curriculum Vitae</h2>
                 <p className="text-gray-500 text-sm">Sube tu CV en PDF para que las empresas puedan revisarlo</p>
               </div>
 

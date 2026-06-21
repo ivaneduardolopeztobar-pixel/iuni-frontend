@@ -10,7 +10,7 @@ export default function NotFound() {
           <span className="text-red-600">i</span>UNI
         </h1>
         <p className="text-8xl font-black text-white/10 my-8">404</p>
-        <h2 className="text-2xl font-bold mb-2">Pagina no encontrada</h2>
+        <h2 className="text-2xl font-bold mb-2 text-white">Pagina no encontrada</h2>
         <p className="text-gray-500 text-sm mb-8">
           La pagina que buscas no existe o fue movida.
         </p>

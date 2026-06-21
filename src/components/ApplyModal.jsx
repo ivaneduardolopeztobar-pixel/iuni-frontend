@@ -64,7 +64,7 @@ export default function ApplyModal({ jobId, jobTitle, onClose, onSuccess }) {
 
         {/* Header */}
         <div className="p-6 border-b border-gray-800">
-          <h2 className="font-black text-lg">Postularse a</h2>
+          <h2 className="font-black text-lg text-white">Postularse a</h2>
           <p className="text-red-500 font-semibold text-sm mt-0.5 truncate">{jobTitle}</p>
         </div>
 

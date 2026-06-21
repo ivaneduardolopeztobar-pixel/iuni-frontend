@@ -58,12 +58,12 @@ export default function ResetPassword() {
               <div className="w-16 h-16 bg-green-900 rounded-full flex items-center justify-center mx-auto mb-4">
                 <CheckCircle size={32} className="text-green-400" />
               </div>
-              <h2 className="text-xl font-bold mb-2">Contraseña actualizada</h2>
+              <h2 className="text-xl font-bold mb-2 text-white">Contraseña actualizada</h2>
               <p className="text-gray-400 text-sm">Redirigiendo al login...</p>
             </div>
           ) : (
             <>
-              <h2 className="text-xl font-bold mb-2">Nueva contraseña</h2>
+              <h2 className="text-xl font-bold mb-2 text-white">Nueva contraseña</h2>
               <p className="text-gray-400 text-sm mb-6">Ingresa tu nueva contraseña.</p>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>

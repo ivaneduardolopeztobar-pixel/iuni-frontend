@@ -38,7 +38,7 @@ export default function VerifyEmail() {
           {status === "loading" && (
             <>
               <Loader size={48} className="text-red-500 mx-auto mb-4 animate-spin" />
-              <h2 className="text-xl font-bold mb-2">Verificando tu correo...</h2>
+              <h2 className="text-xl font-bold mb-2 text-white">Verificando tu correo...</h2>
               <p className="text-gray-500 text-sm">Un momento por favor</p>
             </>
           )}
@@ -47,7 +47,7 @@ export default function VerifyEmail() {
               <div className="w-16 h-16 bg-green-900 rounded-full flex items-center justify-center mx-auto mb-4">
                 <CheckCircle size={32} className="text-green-400" />
               </div>
-              <h2 className="text-xl font-bold mb-2">Correo verificado</h2>
+              <h2 className="text-xl font-bold mb-2 text-white">Correo verificado</h2>
               <p className="text-gray-400 text-sm mb-2">Tu cuenta esta lista. Redirigiendo...</p>
               <div className="w-full bg-white/[0.04] rounded-full h-1 mt-4">
                 <div className="bg-green-500 h-1 rounded-full animate-pulse w-full" />
@@ -59,7 +59,7 @@ export default function VerifyEmail() {
               <div className="w-16 h-16 bg-red-950 rounded-full flex items-center justify-center mx-auto mb-4">
                 <XCircle size={32} className="text-red-500" />
               </div>
-              <h2 className="text-xl font-bold mb-2">Error de verificación</h2>
+              <h2 className="text-xl font-bold mb-2 text-white">Error de verificación</h2>
               <p className="text-gray-400 text-sm mb-6">{error}</p>
               <Link to="/login" className="bg-red-600 hover:bg-red-500 text-white font-bold px-6 py-2.5 rounded-xl transition text-sm">
                 Ir al login

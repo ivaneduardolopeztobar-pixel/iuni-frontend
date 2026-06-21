@@ -162,7 +162,7 @@ export default function StudentProfile() {
               <input ref={photoRef} type="file" accept="image/*" className="hidden" onChange={handlePhotoUpload} />
             </div>
             <div>
-              <h2 className="text-xl font-bold">
+              <h2 className="text-xl font-bold text-white">
                 {profile && profile.firstName} {profile && profile.lastName}
               </h2>
               <p className="text-gray-500 text-sm">

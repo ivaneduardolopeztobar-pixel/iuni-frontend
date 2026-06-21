@@ -41,7 +41,7 @@ export default function ForgotPassword() {
               <div className="w-16 h-16 bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <CheckCircle size={32} className="text-green-400" />
               </div>
-              <h2 className="text-xl font-bold mb-2">Correo enviado</h2>
+              <h2 className="text-xl font-bold mb-2 text-white">Correo enviado</h2>
               <p className="text-gray-400 text-sm mb-6">
                 Si el email esta registrado recibiras un enlace para restablecer tu contraseña.
                 Revisa tu bandeja de entrada y spam.
