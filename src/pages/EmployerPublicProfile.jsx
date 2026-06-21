@@ -44,11 +44,11 @@ export default function EmployerPublicProfile() {
         </button>
 
         {/* Header empresa */}
-        <div className="bg-gray-950 border border-gray-800 rounded-2xl overflow-hidden mb-6">
-          <div className="h-24 bg-gradient-to-r from-gray-900 to-gray-950 border-b border-gray-800" />
+        <div className="bg-white/[0.03] border border-white/10 rounded-2xl overflow-hidden mb-6 animate-fade-in">
+          <div className="h-24 bg-gradient-to-r from-white/[0.04] to-transparent border-b border-white/10" />
           <div className="px-8 pb-8">
             <div className="flex items-end gap-5 -mt-10 mb-6">
-              <div className="w-20 h-20 rounded-xl border-4 border-gray-950 overflow-hidden bg-red-600 flex items-center justify-center shrink-0">
+              <div className="w-20 h-20 rounded-xl border-4 border-black overflow-hidden bg-red-600 flex items-center justify-center shrink-0 shadow-lg shadow-red-600/20">
                 {logoUrl ? (
                   <img src={logoUrl} alt="Logo" className="w-full h-full object-cover" />
                 ) : (
@@ -88,11 +88,11 @@ export default function EmployerPublicProfile() {
 
         {/* Estadisticas */}
         <div className="grid grid-cols-2 gap-4 mb-6">
-          <div className="bg-gray-950 border border-gray-800 rounded-2xl p-5 text-center">
+          <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-5 text-center hover:border-white/20 transition-all">
             <p className="text-3xl font-black text-red-500">{employer._count?.jobPosts || 0}</p>
             <p className="text-gray-500 text-sm mt-1">Empleos publicados</p>
           </div>
-          <div className="bg-gray-950 border border-gray-800 rounded-2xl p-5 text-center">
+          <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-5 text-center hover:border-white/20 transition-all">
             <p className="text-3xl font-black text-red-500">
               {employer.jobPosts?.reduce((sum, j) => sum + (j._count?.applications || 0), 0) || 0}
             </p>
@@ -101,7 +101,7 @@ export default function EmployerPublicProfile() {
         </div>
 
         {/* Ofertas activas */}
-        <div className="bg-gray-950 border border-gray-800 rounded-2xl p-6">
+        <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-6 animate-slide-up">
           <h2 className="font-black text-lg mb-4 flex items-center gap-2">
             <Briefcase size={18} className="text-red-500" />
             Ofertas activas ({employer.jobPosts?.length || 0})
@@ -115,13 +115,13 @@ export default function EmployerPublicProfile() {
                 <div
                   key={job.id}
                   onClick={() => navigate("/jobs/" + job.id)}
-                  className="flex items-center justify-between p-4 bg-gray-900 rounded-xl border border-gray-800 hover:border-red-600 cursor-pointer transition group"
+                  className="flex items-center justify-between p-4 bg-white/[0.03] rounded-xl border border-white/10 hover:border-red-600/40 hover:bg-white/[0.05] cursor-pointer transition-all group"
                 >
                   <div>
                     <h3 className="font-bold group-hover:text-red-500 transition">{job.title}</h3>
                     <div className="flex items-center gap-3 mt-1 text-xs text-gray-500">
                       {job.jobType && (
-                        <span className="bg-gray-800 px-2 py-0.5 rounded-full border border-gray-700">{job.jobType}</span>
+                        <span className="bg-white/5 px-2 py-0.5 rounded-full border border-white/10">{job.jobType}</span>
                       )}
                       {job.salary && <span className="text-green-400 font-semibold">{job.salary}</span>}
                       <span>{Math.floor((Date.now() - new Date(job.createdAt)) / 86400000)}d atras</span>
@@ -143,7 +143,7 @@ export default function EmployerPublicProfile() {
 
 function InfoCard({ icon, label, value }) {
   return (
-    <div className="bg-gray-900 rounded-xl p-3 border border-gray-800">
+    <div className="bg-white/[0.03] rounded-xl p-3 border border-white/10">
       <div className="flex items-center gap-2 mb-1">{icon}<p className="text-gray-500 text-xs">{label}</p></div>
       <p className="text-white text-sm font-medium">{value}</p>
     </div>
