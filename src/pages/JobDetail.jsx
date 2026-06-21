@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, MapPin, Briefcase, DollarSign, GraduationCap, Users, ShieldCheck, Share2, MessageCircle, Copy, CheckCircle } from 'lucide-react';
+import { ArrowLeft, MapPin, Briefcase, DollarSign, GraduationCap, Users, ShieldCheck, Share2, MessageCircle, Copy, CheckCircle, Heart } from 'lucide-react';
 import SEO from '../components/SEO';
 import Navbar from '../components/Navbar';
+import ApplyModal from '../components/ApplyModal';
 import api from '../api/client';
 
 export default function JobDetail() {
@@ -10,13 +11,16 @@ export default function JobDetail() {
   const navigate = useNavigate();
   const [job, setJob] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [applying, setApplying] = useState(false);
   const [showApplyModal, setShowApplyModal] = useState(false);
   const [showShare, setShowShare] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [favorited, setFavorited] = useState(false);
 
   useEffect(() => {
     api.get(`/jobs/${id}`).then(r => setJob(r.data)).catch(() => navigate('/home')).finally(() => setLoading(false));
+    api.get('/favorites/my').then(r => {
+      setFavorited(r.data.some(f => f.jobPostId === parseInt(id)));
+    }).catch(() => {});
   }, [id]);
 
   const jobUrl = window.location.href;
@@ -36,14 +40,11 @@ export default function JobDetail() {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const handleApply = async () => {
-    setApplying(true);
+  const toggleFavorite = async () => {
     try {
-      await api.post(`/applications/${id}/apply`);
-      alert('¡Postulación enviada exitosamente!');
-    } catch (err) {
-      alert(err.response?.data?.error || 'Error');
-    } finally { setApplying(false); }
+      const { data } = await api.post(`/favorites/${id}/toggle`);
+      setFavorited(data.favorited);
+    } catch {}
   };
 
   if (loading) return (
@@ -86,29 +87,36 @@ export default function JobDetail() {
                 </span>
               )}
             </div>
-            <div>
+            <div className="flex-1 min-w-0">
               <h1 className="text-2xl font-black">{job?.title}</h1>
-              <div className="flex items-center gap-2">
-              <button
-                onClick={() => job?.employer?.id && navigate("/employer/view/" + job.employer.id)}
-                className="text-red-500 font-semibold hover:text-red-400 transition hover:underline"
-              >
-                {job?.employer?.companyName}
-              </button>
-              {job?.employer?.verified && (
-                <span className="flex items-center gap-1 text-xs font-bold text-green-400 bg-green-950 border border-green-900 px-2 py-0.5 rounded-full">
-                  <ShieldCheck size={11}/> Verificada
-                </span>
-              )}
+              <div className="flex items-center gap-2 flex-wrap">
+                <button
+                  onClick={() => job?.employer?.id && navigate("/employer/view/" + job.employer.id)}
+                  className="text-red-500 font-semibold hover:text-red-400 transition hover:underline"
+                >
+                  {job?.employer?.companyName}
+                </button>
+                {job?.employer?.verified && (
+                  <span className="flex items-center gap-1 text-xs font-bold text-green-400 bg-green-500/10 border border-green-500/20 px-2 py-0.5 rounded-full">
+                    <ShieldCheck size={11} /> Verificada
+                  </span>
+                )}
+              </div>
             </div>
-            </div>
+            <button
+              onClick={toggleFavorite}
+              className="p-2.5 hover:bg-white/10 rounded-xl transition-all shrink-0"
+              title={favorited ? "Quitar de favoritos" : "Guardar como favorito"}
+            >
+              <Heart size={20} className={favorited ? "text-red-500 fill-red-500" : "text-gray-500 hover:text-red-500 transition-colors"} />
+            </button>
           </div>
 
           <div className="flex flex-wrap gap-2 mb-6">
-            {job?.employer?.city && <Tag icon={<MapPin size={13}/>} label={job.employer.city} />}
-            {job?.jobType && <Tag icon={<Briefcase size={13}/>} label={job.jobType} />}
-            {job?.salary && <Tag icon={<DollarSign size={13}/>} label={job.salary} color="green" />}
-            {job?.minEducation && <Tag icon={<GraduationCap size={13}/>} label={job.minEducation} />}
+            {job?.employer?.city && <Tag icon={<MapPin size={13} />} label={job.employer.city} />}
+            {job?.jobType && <Tag icon={<Briefcase size={13} />} label={job.jobType} />}
+            {job?.salary && <Tag icon={<DollarSign size={13} />} label={job.salary} color="green" />}
+            {job?.minEducation && <Tag icon={<GraduationCap size={13} />} label={job.minEducation} />}
           </div>
 
           <div className="space-y-5">
@@ -121,7 +129,6 @@ export default function JobDetail() {
           </div>
 
           <div className="mt-8 pt-6 border-t border-white/10">
-            {/* Share */}
             <div className="relative mb-4">
               <button
                 onClick={() => setShowShare(!showShare)}
@@ -154,17 +161,16 @@ export default function JobDetail() {
               )}
             </div>
             <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-0 justify-between">
-            <div className="flex items-center gap-2 text-gray-500 text-sm">
-              <Users size={16} />
-              <span>{job?.applications?.length || 0} postulantes</span>
-            </div>
-            <button
-              onClick={handleApply}
-              disabled={applying}
-              className="bg-red-600 hover:bg-red-500 text-white font-bold px-8 py-3.5 rounded-xl transition-all disabled:opacity-50 w-full md:w-auto shadow-lg shadow-red-600/25 hover:-translate-y-0.5"
-            >
-              {applying ? 'Enviando...' : 'Postularme ahora'}
-            </button>
+              <div className="flex items-center gap-2 text-gray-500 text-sm">
+                <Users size={16} />
+                <span>{job?.applications?.length || 0} postulantes</span>
+              </div>
+              <button
+                onClick={() => setShowApplyModal(true)}
+                className="bg-red-600 hover:bg-red-500 text-white font-bold px-8 py-3.5 rounded-xl transition-all w-full md:w-auto shadow-lg shadow-red-600/25 hover:-translate-y-0.5"
+              >
+                Postularme ahora
+              </button>
             </div>
           </div>
         </div>
