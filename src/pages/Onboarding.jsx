@@ -140,7 +140,7 @@ export default function Onboarding() {
             <p className="text-sm text-gray-400">Paso {step} de 3</p>
             <p className="text-sm text-gray-400">{Math.round(progress + 33)}% completado</p>
           </div>
-          <div className="w-full bg-gray-900 rounded-full h-2">
+          <div className="w-full bg-white/[0.04] rounded-full h-2">
             <div
               className="bg-red-600 h-2 rounded-full transition-all duration-500"
               style={{ width: (step / 3 * 100) + "%" }}
@@ -155,7 +155,7 @@ export default function Onboarding() {
               <div className={"w-8 h-8 rounded-full flex items-center justify-center text-xs font-black shrink-0 transition-all " +
                 (step > s.id ? "bg-green-600 text-white" :
                  step === s.id ? "bg-red-600 text-white" :
-                 "bg-gray-900 text-gray-600")}>
+                 "bg-white/[0.04] text-gray-600")}>
                 {step > s.id ? <CheckCircle size={16} /> : s.id}
               </div>
               <div className="hidden md:block flex-1">
@@ -169,7 +169,7 @@ export default function Onboarding() {
         </div>
 
         {/* Step content */}
-        <div className="bg-gray-950 rounded-2xl border border-gray-800 p-8">
+        <div className="bg-white/[0.03] rounded-2xl border border-white/10 p-8">
 
           {step === 1 && (
             <div className="space-y-5">
@@ -190,7 +190,7 @@ export default function Onboarding() {
                   onChange={e => set("profileDescription", e.target.value)}
                   rows={3}
                   placeholder="Estudiante de 4to año de Ingeniería en Desarrollo de Software, apasionado por..."
-                  className="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white text-sm placeholder-gray-600 focus:outline-none focus:border-red-600 transition resize-none"
+                  className="w-full bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder-gray-600 focus:outline-none focus:border-red-600 transition resize-none"
                 />
               </div>
             </div>
@@ -218,7 +218,7 @@ export default function Onboarding() {
               </div>
 
               <div className={"border-2 border-dashed rounded-2xl p-8 text-center transition " +
-                (cvUploaded ? "border-green-600 bg-green-950" : "border-gray-700 hover:border-red-600")}>
+                (cvUploaded ? "border-green-600 bg-green-950" : "border-white/10 hover:border-red-600")}>
                 {cvUploaded ? (
                   <div>
                     <CheckCircle size={48} className="text-green-400 mx-auto mb-3" />
@@ -237,7 +237,7 @@ export default function Onboarding() {
                       className="hidden"
                       id="cv-input"
                     />
-                    <label htmlFor="cv-input" className="cursor-pointer bg-gray-900 hover:bg-gray-800 border border-gray-700 text-white text-sm font-bold px-6 py-2.5 rounded-xl transition inline-block">
+                    <label htmlFor="cv-input" className="cursor-pointer bg-white/[0.04] hover:bg-gray-800 border border-white/10 text-white text-sm font-bold px-6 py-2.5 rounded-xl transition inline-block">
                       Seleccionar PDF
                     </label>
                     {cvFile && (
@@ -246,7 +246,7 @@ export default function Onboarding() {
                         <button
                           onClick={handleCVUpload}
                           disabled={uploading}
-                          className="bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-2.5 rounded-xl transition disabled:opacity-50"
+                          className="bg-red-600 hover:bg-red-500 text-white font-bold px-6 py-2.5 rounded-xl transition disabled:opacity-50"
                         >
                           {uploading ? "Subiendo..." : "Subir CV"}
                         </button>
@@ -256,7 +256,7 @@ export default function Onboarding() {
                 )}
               </div>
 
-              <div className="bg-gray-900 rounded-xl p-4 border border-gray-800">
+              <div className="bg-white/[0.04] rounded-xl p-4 border border-white/10">
                 <p className="text-xs text-gray-500 leading-relaxed">
                   <span className="text-white font-bold">¿No tienes CV listo?</span> Puedes saltarte este paso
                   y subirlo mas tarde desde tu perfil. Sin embargo, tener un CV aumenta
@@ -271,7 +271,7 @@ export default function Onboarding() {
             {step > 1 && (
               <button
                 onClick={() => setStep(s => s - 1)}
-                className="flex-1 border border-gray-700 text-gray-400 hover:text-white font-bold py-3 rounded-xl transition text-sm"
+                className="flex-1 border border-white/10 text-gray-400 hover:text-white font-bold py-3 rounded-xl transition text-sm"
               >
                 Atras
               </button>
@@ -280,7 +280,7 @@ export default function Onboarding() {
               <button
                 onClick={handleNext}
                 disabled={saving}
-                className="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-xl transition disabled:opacity-50 flex items-center justify-center gap-2"
+                className="flex-1 bg-red-600 hover:bg-red-500 text-white font-bold py-3 rounded-xl transition disabled:opacity-50 flex items-center justify-center gap-2"
               >
                 {saving ? "Guardando..." : "Continuar"} <ChevronRight size={18} />
               </button>
@@ -288,7 +288,7 @@ export default function Onboarding() {
               <button
                 onClick={handleFinish}
                 disabled={saving}
-                className="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-xl transition disabled:opacity-50"
+                className="flex-1 bg-red-600 hover:bg-red-500 text-white font-bold py-3 rounded-xl transition disabled:opacity-50"
               >
                 {saving ? "Guardando..." : "Ir a buscar empleos"}
               </button>
@@ -308,7 +308,7 @@ function Field({ label, value, onChange, placeholder }) {
         value={value}
         onChange={e => onChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white text-sm placeholder-gray-600 focus:outline-none focus:border-red-600 transition"
+        className="w-full bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder-gray-600 focus:outline-none focus:border-red-600 transition"
       />
     </div>
   );
