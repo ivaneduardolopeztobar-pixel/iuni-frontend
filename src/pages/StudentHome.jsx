@@ -15,6 +15,7 @@ const BASE = "http://localhost:3001";
 export default function StudentHome() {
   const { user } = useAuth();
   const [jobs, setJobs] = useState([]);
+  const [favoritedIds, setFavoritedIds] = useState(new Set());
   const [search, setSearch] = useState("");
   const [location, setLocation] = useState("");
   const [jobType, setJobType] = useState("Todos");
@@ -83,6 +84,9 @@ export default function StudentHome() {
         if (incomplete) navigate("/onboarding");
       }
     }).catch(() => {});
+    api.get("/favorites/my").then(r => {
+      setFavoritedIds(new Set(r.data.map(f => f.jobPostId)));
+    }).catch(() => {});
   }, []);
 
   // Debounce en busqueda de texto
@@ -119,7 +123,15 @@ export default function StudentHome() {
 
   const handleFavorite = async (e, jobId) => {
     e.stopPropagation();
-    try { await api.post("/favorites/" + jobId + "/toggle"); } catch {}
+    try {
+      const { data } = await api.post("/favorites/" + jobId + "/toggle");
+      setFavoritedIds(prev => {
+        const next = new Set(prev);
+        if (data.favorited) next.add(jobId);
+        else next.delete(jobId);
+        return next;
+      });
+    } catch {}
   };
 
   const handleApply = (e, job) => {
@@ -337,7 +349,10 @@ export default function StudentHome() {
                       </div>
                       <div className="flex flex-col gap-2 shrink-0">
                         <button onClick={e => handleFavorite(e, job.id)} className="p-2 hover:bg-gray-800 rounded-lg transition">
-                          <Heart size={16} className="text-gray-600 hover:text-red-500 transition" />
+                          <Heart
+                            size={16}
+                            className={favoritedIds.has(job.id) ? "text-red-500 fill-red-500 transition-colors" : "text-gray-600 hover:text-red-500 transition-colors"}
+                          />
                         </button>
                         <button onClick={e => shareJob(e, job)} className="p-2 hover:bg-gray-800 rounded-lg transition" title="Compartir por WhatsApp">
                           <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" className="text-gray-600 hover:text-green-500 transition group-hover:text-green-500">
