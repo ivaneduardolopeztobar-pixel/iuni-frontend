@@ -81,21 +81,21 @@ export default function EmployerProfile() {
           <h1 className="text-2xl font-black">Perfil de Empresa</h1>
           <div className="flex gap-2 w-full md:w-auto">
             {editing && (
-              <button onClick={() => setEditing(false)} className="flex-1 md:flex-none px-4 py-2 rounded-xl border border-gray-700 text-gray-400 text-sm hover:text-white transition">
+              <button onClick={() => setEditing(false)} className="flex-1 md:flex-none px-4 py-2 rounded-xl border border-white/10 text-gray-400 text-sm hover:text-white hover:border-white/30 transition-all">
                 Cancelar
               </button>
             )}
             <button
               onClick={() => editing ? handleSave() : setEditing(true)}
               disabled={saving}
-              className="flex-1 md:flex-none bg-red-600 hover:bg-red-700 text-white font-bold px-5 py-2 rounded-xl transition text-sm disabled:opacity-50"
+              className="flex-1 md:flex-none bg-red-600 hover:bg-red-500 text-white font-bold px-5 py-2.5 rounded-xl transition-all text-sm disabled:opacity-50 shadow-lg shadow-red-600/20"
             >
               {saving ? "Guardando..." : editing ? "Guardar" : "Editar"}
             </button>
           </div>
         </div>
 
-        <div className="bg-gray-950 rounded-2xl border border-gray-800 p-6 md:p-8">
+        <div className="bg-white/[0.03] rounded-2xl border border-white/10 p-6 md:p-8 animate-fade-in">
 
           {/* Logo empresa */}
           <div className="flex items-center gap-4 mb-8">
@@ -110,7 +110,7 @@ export default function EmployerProfile() {
               <button
                 onClick={() => logoRef.current.click()}
                 disabled={uploadingLogo}
-                className="absolute -bottom-1 -right-1 w-7 h-7 bg-gray-800 border border-gray-600 rounded-full flex items-center justify-center hover:bg-gray-700 transition"
+                className="absolute -bottom-1 -right-1 w-7 h-7 bg-[#111] border border-white/20 rounded-full flex items-center justify-center hover:bg-white/10 hover:border-red-600/50 transition-all"
               >
                 {uploadingLogo
                   ? <div className="w-3 h-3 border border-white border-t-transparent rounded-full animate-spin" />
@@ -135,7 +135,7 @@ export default function EmployerProfile() {
                   <input
                     value={form[k] || ""}
                     onChange={e => setForm({...form, [k]: e.target.value})}
-                    className="w-full bg-gray-900 border border-gray-700 rounded-xl px-3 py-2 text-white text-sm focus:outline-none focus:border-red-600 transition"
+                    className="w-full bg-white/[0.04] border border-white/10 rounded-xl px-3 py-2.5 text-white text-sm placeholder-gray-600 focus:outline-none focus:border-red-600/50 focus:bg-white/[0.06] transition-all"
                   />
                 ) : (
                   <p className="text-sm text-white">{form[k] || <span className="text-gray-700">Sin especificar</span>}</p>
