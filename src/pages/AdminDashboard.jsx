@@ -131,7 +131,7 @@ export default function AdminDashboard() {
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Navbar admin */}
-      <nav className="bg-gray-950 border-b border-gray-800 px-6 py-4 flex items-center justify-between sticky top-0 z-50">
+      <nav className="bg-white/[0.03] border-b border-white/10 px-6 py-4 flex items-center justify-between sticky top-0 z-50">
         <div className="flex items-center gap-3">
           <h1 className="text-xl font-black"><span className="text-red-600">i</span>UNI</h1>
           <span className="bg-red-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">ADMIN</span>
@@ -144,7 +144,7 @@ export default function AdminDashboard() {
       <div className="max-w-6xl mx-auto px-4 py-8">
 
         {/* Tabs */}
-        <div className="flex gap-2 mb-8 border-b border-gray-800 pb-0">
+        <div className="flex gap-2 mb-8 border-b border-white/10 pb-0">
           {[
             { id: "stats", label: "Estadisticas", icon: <TrendingUp size={16}/> },
             { id: "users", label: "Usuarios", icon: <Users size={16}/> },
@@ -175,7 +175,7 @@ export default function AdminDashboard() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Usuarios recientes */}
-              <div className="bg-gray-950 border border-gray-800 rounded-2xl p-6">
+              <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-6">
                 <h3 className="font-bold mb-4 flex items-center gap-2"><Users size={16} className="text-red-500"/> Usuarios recientes</h3>
                 <div className="space-y-3">
                   {stats.recentUsers.map(u => (
@@ -194,7 +194,7 @@ export default function AdminDashboard() {
               </div>
 
               {/* Empleos recientes */}
-              <div className="bg-gray-950 border border-gray-800 rounded-2xl p-6">
+              <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-6">
                 <h3 className="font-bold mb-4 flex items-center gap-2"><Briefcase size={16} className="text-red-500"/> Empleos recientes</h3>
                 <div className="space-y-3">
                   {stats.recentJobs.map(j => (
@@ -211,7 +211,7 @@ export default function AdminDashboard() {
             </div>
 
             {/* Postulaciones por estado */}
-            <div className="bg-gray-950 border border-gray-800 rounded-2xl p-6">
+            <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-6">
               <h3 className="font-bold mb-4">Postulaciones por estado</h3>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {stats.applicationsByStatus.map(s => (
@@ -229,7 +229,7 @@ export default function AdminDashboard() {
         {tab === "users" && (
           <div>
             <div className="flex flex-col md:flex-row gap-3 mb-6">
-              <div className="flex items-center gap-2 bg-gray-950 border border-gray-800 rounded-xl px-4 py-2.5 flex-1">
+              <div className="flex items-center gap-2 bg-white/[0.03] border border-white/10 rounded-xl px-4 py-2.5 flex-1">
                 <Search size={16} className="text-gray-600" />
                 <input
                   className="bg-transparent text-sm text-white placeholder-gray-600 focus:outline-none flex-1"
@@ -242,20 +242,20 @@ export default function AdminDashboard() {
               <select
                 value={userType}
                 onChange={e => setUserType(e.target.value)}
-                className="bg-gray-950 border border-gray-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none"
+                className="bg-white/[0.03] border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none"
               >
                 <option value="">Todos</option>
                 <option value="STUDENT">Estudiantes</option>
                 <option value="EMPLOYER">Empleadores</option>
               </select>
-              <button onClick={loadUsers} className="bg-red-600 hover:bg-red-700 text-white font-bold px-5 py-2.5 rounded-xl transition text-sm">
+              <button onClick={loadUsers} className="bg-red-600 hover:bg-red-500 text-white font-bold px-5 py-2.5 rounded-xl transition text-sm">
                 Buscar
               </button>
             </div>
 
-            <div className="bg-gray-950 border border-gray-800 rounded-2xl overflow-hidden">
+            <div className="bg-white/[0.03] border border-white/10 rounded-2xl overflow-hidden">
               <table className="w-full text-sm">
-                <thead className="border-b border-gray-800">
+                <thead className="border-b border-white/10">
                   <tr>
                     <th className="text-left px-4 py-3 text-gray-500 font-medium">Usuario</th>
                     <th className="text-left px-4 py-3 text-gray-500 font-medium hidden md:table-cell">Nombre</th>
@@ -266,7 +266,7 @@ export default function AdminDashboard() {
                 </thead>
                 <tbody>
                   {users.map(u => (
-                    <tr key={u.id} className="border-b border-gray-900 hover:bg-gray-900 transition">
+                    <tr key={u.id} className="border-b border-gray-900 hover:bg-white/[0.04] transition">
                       <td className="px-4 py-3 text-gray-300 truncate max-w-48">{u.email}</td>
                       <td className="px-4 py-3 text-gray-400 hidden md:table-cell">
                         {u.student ? u.student.firstName + " " + u.student.lastName : u.employer?.companyName || "—"}
@@ -302,9 +302,9 @@ export default function AdminDashboard() {
         {/* EMPRESAS */}
         {tab === "employers" && (
           <div>
-            <div className="bg-gray-950 border border-gray-800 rounded-2xl overflow-hidden">
+            <div className="bg-white/[0.03] border border-white/10 rounded-2xl overflow-hidden">
               <table className="w-full text-sm">
-                <thead className="border-b border-gray-800">
+                <thead className="border-b border-white/10">
                   <tr>
                     <th className="text-left px-4 py-3 text-gray-500 font-medium">Empresa</th>
                     <th className="text-left px-4 py-3 text-gray-500 font-medium hidden md:table-cell">Email</th>
@@ -315,7 +315,7 @@ export default function AdminDashboard() {
                 </thead>
                 <tbody>
                   {employers.map(e => (
-                    <tr key={e.id} className="border-b border-gray-900 hover:bg-gray-900 transition">
+                    <tr key={e.id} className="border-b border-gray-900 hover:bg-white/[0.04] transition">
                       <td className="px-4 py-3">
                         <div className="flex items-center gap-2">
                           <div className="w-8 h-8 bg-red-600 rounded-lg flex items-center justify-center text-xs font-black shrink-0">
@@ -367,7 +367,7 @@ export default function AdminDashboard() {
                 <h3 className="font-bold mb-4 text-yellow-400">Solicitudes pendientes ({domainRequests.length})</h3>
                 <div className="space-y-3">
                   {domainRequests.map(r => (
-                    <div key={r.id} className="flex items-center justify-between bg-gray-950 rounded-xl p-4">
+                    <div key={r.id} className="flex items-center justify-between bg-white/[0.03] rounded-xl p-4">
                       <div>
                         <p className="font-bold text-sm">@{r.domain}</p>
                         <p className="text-gray-400 text-xs">{r.university}</p>
@@ -384,25 +384,25 @@ export default function AdminDashboard() {
             )}
 
             {/* Agregar dominio */}
-            <div className="bg-gray-950 border border-gray-800 rounded-2xl p-6">
+            <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-6">
               <h3 className="font-bold mb-4">Agregar universidad</h3>
               <form onSubmit={handleAddDomain} className="flex gap-3 flex-wrap">
                 <input value={newDomain.domain} onChange={e => setNewDomain({...newDomain, domain: e.target.value})}
                   placeholder="dominio.edu.sv" required
-                  className="bg-gray-900 border border-gray-700 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-red-600 flex-1 min-w-48" />
+                  className="bg-white/[0.04] border border-white/10 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-red-600 flex-1 min-w-48" />
                 <input value={newDomain.university} onChange={e => setNewDomain({...newDomain, university: e.target.value})}
                   placeholder="Nombre de la universidad" required
-                  className="bg-gray-900 border border-gray-700 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-red-600 flex-1 min-w-48" />
-                <button type="submit" className="bg-red-600 hover:bg-red-700 text-white font-bold px-5 py-2.5 rounded-xl transition text-sm">
+                  className="bg-white/[0.04] border border-white/10 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-red-600 flex-1 min-w-48" />
+                <button type="submit" className="bg-red-600 hover:bg-red-500 text-white font-bold px-5 py-2.5 rounded-xl transition text-sm">
                   Agregar
                 </button>
               </form>
             </div>
 
             {/* Lista de dominios */}
-            <div className="bg-gray-950 border border-gray-800 rounded-2xl overflow-hidden">
+            <div className="bg-white/[0.03] border border-white/10 rounded-2xl overflow-hidden">
               <table className="w-full text-sm">
-                <thead className="border-b border-gray-800">
+                <thead className="border-b border-white/10">
                   <tr>
                     <th className="text-left px-4 py-3 text-gray-500 font-medium">Dominio</th>
                     <th className="text-left px-4 py-3 text-gray-500 font-medium">Universidad</th>
@@ -412,11 +412,11 @@ export default function AdminDashboard() {
                 </thead>
                 <tbody>
                   {domains.map(d => (
-                    <tr key={d.id} className="border-b border-gray-900 hover:bg-gray-900 transition">
+                    <tr key={d.id} className="border-b border-gray-900 hover:bg-white/[0.04] transition">
                       <td className="px-4 py-3 font-mono text-red-400 text-sm">@{d.domain}</td>
                       <td className="px-4 py-3 text-gray-300">{d.university}</td>
                       <td className="px-4 py-3">
-                        <span className={"text-xs font-bold px-2 py-0.5 rounded-full " + (d.active ? "bg-green-950 text-green-400" : "bg-gray-900 text-gray-500")}>
+                        <span className={"text-xs font-bold px-2 py-0.5 rounded-full " + (d.active ? "bg-green-950 text-green-400" : "bg-white/[0.04] text-gray-500")}>
                           {d.active ? "Activo" : "Inactivo"}
                         </span>
                       </td>
@@ -437,9 +437,9 @@ export default function AdminDashboard() {
         {/* EMPLEOS */}
         {tab === "jobs" && (
           <div>
-            <div className="bg-gray-950 border border-gray-800 rounded-2xl overflow-hidden">
+            <div className="bg-white/[0.03] border border-white/10 rounded-2xl overflow-hidden">
               <table className="w-full text-sm">
-                <thead className="border-b border-gray-800">
+                <thead className="border-b border-white/10">
                   <tr>
                     <th className="text-left px-4 py-3 text-gray-500 font-medium">Empleo</th>
                     <th className="text-left px-4 py-3 text-gray-500 font-medium hidden md:table-cell">Empresa</th>
@@ -450,13 +450,13 @@ export default function AdminDashboard() {
                 </thead>
                 <tbody>
                   {jobs.map(j => (
-                    <tr key={j.id} className="border-b border-gray-900 hover:bg-gray-900 transition">
+                    <tr key={j.id} className="border-b border-gray-900 hover:bg-white/[0.04] transition">
                       <td className="px-4 py-3 font-medium truncate max-w-48">{j.title}</td>
                       <td className="px-4 py-3 text-gray-400 hidden md:table-cell">{j.employer?.companyName}</td>
                       <td className="px-4 py-3 text-gray-400 hidden md:table-cell">{j._count?.applications}</td>
                       <td className="px-4 py-3">
                         <span className={"text-xs font-bold px-2 py-0.5 rounded-full " +
-                          (j.isActive ? "bg-green-950 text-green-400" : "bg-gray-900 text-gray-500")}>
+                          (j.isActive ? "bg-green-950 text-green-400" : "bg-white/[0.04] text-gray-500")}>
                           {j.isActive ? "Activo" : "Inactivo"}
                         </span>
                       </td>
