@@ -221,7 +221,7 @@ export default function StudentProfile() {
                 </div>
               ))}
               <div className="col-span-2">
-                <label className="text-gray-400 text-xs mb-1 block">Descripcion profesional</label>
+                <label className="text-gray-400 text-xs mb-1 block">Descripción profesional</label>
                 <textarea
                   value={form.profileDescription || ""}
                   onChange={e => setForm({...form, profileDescription: e.target.value})}
@@ -233,7 +233,7 @@ export default function StudentProfile() {
           ) : (
             <div className="space-y-5">
               {profile && profile.profileDescription && (
-                <Info title="Descripcion" value={profile.profileDescription} />
+                <Info title="Descripción" value={profile.profileDescription} />
               )}
               <div className="grid grid-cols-2 gap-4">
                 {FIELDS.filter(([k]) => profile && profile[k]).map(([k, l]) => (

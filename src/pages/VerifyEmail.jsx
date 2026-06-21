@@ -58,7 +58,7 @@ export default function VerifyEmail() {
               <div className="w-16 h-16 bg-red-950 rounded-full flex items-center justify-center mx-auto mb-4">
                 <XCircle size={32} className="text-red-500" />
               </div>
-              <h2 className="text-xl font-bold mb-2">Error de verificacion</h2>
+              <h2 className="text-xl font-bold mb-2">Error de verificación</h2>
               <p className="text-gray-400 text-sm mb-6">{error}</p>
               <Link to="/login" className="bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-2.5 rounded-xl transition text-sm">
                 Ir al login

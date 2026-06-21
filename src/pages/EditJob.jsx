@@ -69,18 +69,18 @@ export default function EditJob() {
           </div>
           <div>
             <h1 className="text-2xl font-black">Editar oferta</h1>
-            <p className="text-gray-500 text-sm mt-0.5">Actualiza la informacion de tu publicacion</p>
+            <p className="text-gray-500 text-sm mt-0.5">Actualiza la información de tu publicacion</p>
           </div>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-5 animate-slide-up">
 
           <div className="bg-white/[0.03] rounded-2xl p-6 md:p-7 border border-white/10">
-            <SectionTitle icon={<FileText size={14} />} title="Informacion del puesto" />
+            <SectionTitle icon={<FileText size={14} />} title="Información del puesto" />
             <div className="space-y-5">
               <F label="Titulo del empleo *" value={form.title} onChange={v => set("title", v)} required />
               <div>
-                <label className="text-gray-400 text-sm mb-1.5 block">Descripcion *</label>
+                <label className="text-gray-400 text-sm mb-1.5 block">Descripción *</label>
                 <textarea
                   value={form.description} onChange={e => set("description", e.target.value)}
                   rows={4} required

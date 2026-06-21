@@ -47,13 +47,13 @@ export default function PostJob() {
 
         <form onSubmit={handleSubmit} className="space-y-5 animate-slide-up">
 
-          {/* Seccion: Lo esencial */}
+          {/* Sección: Lo esencial */}
           <div className="bg-white/[0.03] rounded-2xl p-6 md:p-7 border border-white/10">
-            <SectionTitle icon={<FileText size={14} />} title="Informacion del puesto" />
+            <SectionTitle icon={<FileText size={14} />} title="Información del puesto" />
             <div className="space-y-5">
               <F label="Titulo del empleo *" value={form.title} onChange={v => set('title', v)} required placeholder="Ej: Desarrollador Web Junior" />
               <div>
-                <label className="text-gray-400 text-sm mb-1.5 block">Descripcion *</label>
+                <label className="text-gray-400 text-sm mb-1.5 block">Descripción *</label>
                 <textarea
                   value={form.description} onChange={e => set('description', e.target.value)}
                   rows={4} required
@@ -76,7 +76,7 @@ export default function PostJob() {
             </div>
           </div>
 
-          {/* Seccion: Requisitos */}
+          {/* Sección: Requisitos */}
           <div className="bg-white/[0.03] rounded-2xl p-6 md:p-7 border border-white/10">
             <SectionTitle icon={<Sparkles size={14} />} title="Requisitos y habilidades" />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -87,7 +87,7 @@ export default function PostJob() {
             </div>
           </div>
 
-          {/* Seccion: Beneficios */}
+          {/* Sección: Beneficios */}
           <div className="bg-white/[0.03] rounded-2xl p-6 md:p-7 border border-white/10">
             <SectionTitle icon={<Briefcase size={14} />} title="Condiciones y beneficios" />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">

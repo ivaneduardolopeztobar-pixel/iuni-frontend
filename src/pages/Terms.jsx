@@ -34,15 +34,15 @@ export default function Terms() {
         </Section>
 
         <Section title="3. Uso de la plataforma">
-          Los usuarios se comprometen a proporcionar informacion veridica en sus perfiles.
+          Los usuarios se comprometen a proporcionar información veridica en sus perfiles.
           Esta prohibido crear cuentas falsas, publicar ofertas fraudulentas o usar la
           plataforma para actividades ilegales. iUNI se reserva el derecho de suspender
           cuentas que violen estos terminos.
         </Section>
 
         <Section title="4. Datos personales">
-          Recopilamos informacion necesaria para el funcionamiento de la plataforma:
-          nombre, correo electronico, informacion academica y profesional. Esta informacion
+          Recopilamos información necesaria para el funcionamiento de la plataforma:
+          nombre, correo electronico, información academica y profesional. Esta información
           es compartida con empleadores unicamente cuando el estudiante decide postularse
           a una oferta. No vendemos datos personales a terceros.
         </Section>
@@ -54,9 +54,9 @@ export default function Terms() {
           que se han postulado a sus ofertas.
         </Section>
 
-        <Section title="6. Verificacion de empresas">
+        <Section title="6. Verificación de empresas">
           iUNI verifica manualmente las empresas registradas. Una empresa con badge de
-          verificacion ha sido revisada por nuestro equipo. Sin embargo, iUNI no se hace
+          verificación ha sido revisada por nuestro equipo. Sin embargo, iUNI no se hace
           responsable por el contenido de las ofertas publicadas ni por las decisiones
           de contratacion de las empresas.
         </Section>

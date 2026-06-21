@@ -18,7 +18,7 @@ export default function Register() {
   const navigate = useNavigate();
 
   const validatePassword = (pwd) => {
-    if (pwd.length < 8) return "La contrasena debe tener al menos 8 caracteres";
+    if (pwd.length < 8) return "La contraseña debe tener al menos 8 caracteres";
     if (!/[A-Z]/.test(pwd)) return "Debe contener al menos una mayuscula";
     if (!/[0-9]/.test(pwd)) return "Debe contener al menos un numero";
     return null;
@@ -62,7 +62,7 @@ export default function Register() {
     finally { setLoading(false); }
   };
 
-  // Verificacion enviada
+  // Verificación enviada
   if (verificationSent) return (
     <div className="min-h-screen bg-black flex items-center justify-center p-4 relative overflow-hidden"><div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-red-600/10 rounded-full blur-3xl pointer-events-none" />
       <div className="w-full max-w-md text-center">
@@ -73,12 +73,12 @@ export default function Register() {
           </div>
           <h2 className="text-xl font-bold mb-2">Revisa tu correo institucional</h2>
           <p className="text-gray-400 text-sm mb-2">
-            Enviamos un enlace de verificacion a:
+            Enviamos un enlace de verificación a:
           </p>
           <p className="text-white font-bold mb-4">{form.email}</p>
           <p className="text-gray-500 text-xs mb-6">
             Debes verificar tu correo antes de iniciar sesion.
-            Revisa tambien tu carpeta de spam.
+            Revisa también tu carpeta de spam.
           </p>
           <button
             onClick={async () => {
@@ -243,7 +243,7 @@ export default function Register() {
               placeholder={userType === "STUDENT" ? "nombre@ues.edu.sv" : "correo@empresa.com"}
             />
             <div>
-              <label className="text-gray-400 text-sm mb-1.5 block">Contrasena</label>
+              <label className="text-gray-400 text-sm mb-1.5 block">Contraseña</label>
               <input type="password" value={form.password} onChange={e => setForm({...form, password: e.target.value})}
                 className="w-full bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-red-600/50 focus:bg-white/[0.06] transition-all"
                 required />

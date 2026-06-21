@@ -121,7 +121,7 @@ export default function StudentPublicProfile() {
               </Section>
             )}
 
-            <Section title="Informacion adicional">
+            <Section title="Información adicional">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {student?.languages && (
                   <InfoItem icon={<Globe size={14} />} label="Idiomas" value={student.languages} />

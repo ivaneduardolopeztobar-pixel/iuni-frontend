@@ -122,7 +122,7 @@ export default function Landing() {
           <div className="flex-1 min-w-64 grid grid-cols-2 gap-3 w-full">
             <Card icon={<Briefcase size={22} className="text-red-500" />} title="Publica empleos" desc="Ofertas detalladas con requisitos y beneficios" />
             <Card icon={<Users size={22} className="text-red-500" />} title="Ve postulantes" desc="Perfiles y CVs en un solo lugar" />
-            <Card icon={<ShieldCheck size={22} className="text-red-500" />} title="Verificacion" desc="Badge de confianza para tu empresa" />
+            <Card icon={<ShieldCheck size={22} className="text-red-500" />} title="Verificación" desc="Badge de confianza para tu empresa" />
             <Card icon={<Star size={22} className="text-red-500" />} title="Metricas" desc="Estadisticas de tus publicaciones" />
           </div>
         </div>

@@ -21,7 +21,7 @@ export default function ResetPassword() {
     if (password.length < 8) return "Al menos 8 caracteres";
     if (!/[A-Z]/.test(password)) return "Debe tener al menos una mayuscula";
     if (!/[0-9]/.test(password)) return "Debe tener al menos un numero";
-    if (password !== confirm) return "Las contrasenas no coinciden";
+    if (password !== confirm) return "Las contraseñas no coinciden";
     return null;
   };
 
@@ -57,16 +57,16 @@ export default function ResetPassword() {
               <div className="w-16 h-16 bg-green-900 rounded-full flex items-center justify-center mx-auto mb-4">
                 <CheckCircle size={32} className="text-green-400" />
               </div>
-              <h2 className="text-xl font-bold mb-2">Contrasena actualizada</h2>
+              <h2 className="text-xl font-bold mb-2">Contraseña actualizada</h2>
               <p className="text-gray-400 text-sm">Redirigiendo al login...</p>
             </div>
           ) : (
             <>
-              <h2 className="text-xl font-bold mb-2">Nueva contrasena</h2>
-              <p className="text-gray-400 text-sm mb-6">Ingresa tu nueva contrasena.</p>
+              <h2 className="text-xl font-bold mb-2">Nueva contraseña</h2>
+              <p className="text-gray-400 text-sm mb-6">Ingresa tu nueva contraseña.</p>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                  <label className="text-gray-400 text-sm mb-1.5 block">Nueva contrasena</label>
+                  <label className="text-gray-400 text-sm mb-1.5 block">Nueva contraseña</label>
                   <input
                     type="password"
                     value={password}
@@ -84,20 +84,20 @@ export default function ResetPassword() {
                   )}
                 </div>
                 <div>
-                  <label className="text-gray-400 text-sm mb-1.5 block">Confirmar contrasena</label>
+                  <label className="text-gray-400 text-sm mb-1.5 block">Confirmar contraseña</label>
                   <input
                     type="password"
                     value={confirm}
                     onChange={e => setConfirm(e.target.value)}
                     className="w-full bg-gray-900 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-red-600 transition"
-                    placeholder="Repite la contrasena"
+                    placeholder="Repite la contraseña"
                     required
                   />
                   {confirm && password !== confirm && (
-                    <p className="text-red-500 text-xs mt-1">Las contrasenas no coinciden</p>
+                    <p className="text-red-500 text-xs mt-1">Las contraseñas no coinciden</p>
                   )}
                   {confirm && password === confirm && confirm.length > 0 && (
-                    <p className="text-green-400 text-xs mt-1">Las contrasenas coinciden</p>
+                    <p className="text-green-400 text-xs mt-1">Las contraseñas coinciden</p>
                   )}
                 </div>
                 {error && (
@@ -110,7 +110,7 @@ export default function ResetPassword() {
                   disabled={loading}
                   className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-xl transition disabled:opacity-50"
                 >
-                  {loading ? "Guardando..." : "Guardar nueva contrasena"}
+                  {loading ? "Guardando..." : "Guardar nueva contraseña"}
                 </button>
               </form>
             </>

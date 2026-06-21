@@ -7,7 +7,7 @@ import api from "../api/client";
 const STEPS = [
   {
     id: 1,
-    title: "Informacion basica",
+    title: "Información basica",
     description: "Cuéntanos sobre ti",
     icon: <User size={24} />,
     fields: ["firstName", "lastName", "phone", "city", "country"]
@@ -174,8 +174,8 @@ export default function Onboarding() {
           {step === 1 && (
             <div className="space-y-5">
               <div>
-                <h2 className="text-xl font-black mb-1">Informacion basica</h2>
-                <p className="text-gray-500 text-sm">Las empresas veran esta informacion en tu perfil</p>
+                <h2 className="text-xl font-black mb-1">Información basica</h2>
+                <p className="text-gray-500 text-sm">Las empresas veran esta información en tu perfil</p>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <Field label="Nombre *" value={form.firstName} onChange={v => set("firstName", v)} />
@@ -184,7 +184,7 @@ export default function Onboarding() {
                 <Field label="Ciudad *" value={form.city} onChange={v => set("city", v)} placeholder="Santa Ana" />
               </div>
               <div>
-                <label className="text-gray-400 text-sm mb-1.5 block">Descripcion profesional</label>
+                <label className="text-gray-400 text-sm mb-1.5 block">Descripción profesional</label>
                 <textarea
                   value={form.profileDescription}
                   onChange={e => set("profileDescription", e.target.value)}
@@ -200,7 +200,7 @@ export default function Onboarding() {
             <div className="space-y-5">
               <div>
                 <h2 className="text-xl font-black mb-1">Perfil academico</h2>
-                <p className="text-gray-500 text-sm">Informacion sobre tu carrera y habilidades</p>
+                <p className="text-gray-500 text-sm">Información sobre tu carrera y habilidades</p>
               </div>
               <Field label="Carrera *" value={form.career} onChange={v => set("career", v)} placeholder="Ingenieria en Desarrollo de Software" />
               <Field label="Puesto de trabajo deseado *" value={form.desiredPosition} onChange={v => set("desiredPosition", v)} placeholder="Desarrollador Web, QA Tester, Diseñador UI..." />

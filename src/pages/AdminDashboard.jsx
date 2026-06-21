@@ -342,7 +342,7 @@ export default function AdminDashboard() {
                         <button
                           onClick={() => handleToggleVerify(e.id)}
                           className={"p-1.5 rounded-lg transition " + (e.verified ? "text-green-500 hover:bg-gray-800" : "text-gray-500 hover:text-green-400 hover:bg-gray-800")}
-                          title={e.verified ? "Quitar verificacion" : "Verificar empresa"}
+                          title={e.verified ? "Quitar verificación" : "Verificar empresa"}
                         >
                           {e.verified ? <ShieldCheck size={16}/> : <ShieldOff size={16}/>}
                         </button>
