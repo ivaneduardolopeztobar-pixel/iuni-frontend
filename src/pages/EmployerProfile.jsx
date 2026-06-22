@@ -11,6 +11,7 @@ const FIELDS = [
   ["companyName","Empresa"], ["repName","Representante"],
   ["phone","Telefono"], ["city","Ciudad"], ["country","Pais"],
   ["sector","Sector empresarial"], ["workerCount","No. de trabajadores"],
+  ["website","Sitio web"],
 ];
 
 export default function EmployerProfile() {

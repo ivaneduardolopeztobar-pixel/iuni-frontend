@@ -308,6 +308,7 @@ export default function AdminDashboard() {
                   <tr>
                     <th className="text-left px-4 py-3 text-gray-500 font-medium">Empresa</th>
                     <th className="text-left px-4 py-3 text-gray-500 font-medium hidden md:table-cell">Email</th>
+                    <th className="text-left px-4 py-3 text-gray-500 font-medium hidden md:table-cell">Dominio</th>
                     <th className="text-left px-4 py-3 text-gray-500 font-medium hidden md:table-cell">Empleos</th>
                     <th className="text-left px-4 py-3 text-gray-500 font-medium">Estado</th>
                     <th className="text-right px-4 py-3 text-gray-500 font-medium">Verificar</th>
@@ -328,6 +329,23 @@ export default function AdminDashboard() {
                         </div>
                       </td>
                       <td className="px-4 py-3 text-gray-400 hidden md:table-cell text-xs">{e.user?.email}</td>
+                      <td className="px-4 py-3 hidden md:table-cell">
+                        {e.emailDomainType === "CORPORATE" ? (
+                          <span className="flex items-center gap-1 text-xs font-bold text-green-400 bg-green-500/10 border border-green-500/20 px-2 py-0.5 rounded-full w-fit">
+                            🟢 Corporativo
+                          </span>
+                        ) : (
+                          <span className="flex items-center gap-1 text-xs font-bold text-yellow-400 bg-yellow-500/10 border border-yellow-500/20 px-2 py-0.5 rounded-full w-fit">
+                            🟡 Genérico
+                          </span>
+                        )}
+                        {e.website && (
+                          <a href={e.website.startsWith("http") ? e.website : "https://" + e.website} target="_blank" rel="noreferrer"
+                            className="text-xs text-blue-400 hover:text-blue-300 hover:underline block mt-1 truncate max-w-32">
+                            {e.website}
+                          </a>
+                        )}
+                      </td>
                       <td className="px-4 py-3 text-gray-400 hidden md:table-cell">{e._count?.jobPosts}</td>
                       <td className="px-4 py-3">
                         {e.verified ? (
