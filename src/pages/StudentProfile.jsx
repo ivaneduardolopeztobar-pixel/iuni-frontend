@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Camera, Upload, FileText, CheckCircle } from "lucide-react";
 import Navbar from "../components/Navbar";
+import ChangePasswordCard from "../components/ChangePasswordCard";
 import ProfileCompletionBar from "../components/ProfileCompletionBar";
 import api from "../api/client";
 import { useAuth } from "../context/AuthContext";
@@ -242,6 +243,10 @@ export default function StudentProfile() {
               </div>
             </div>
           )}
+        </div>
+
+        <div className="mt-6">
+          <ChangePasswordCard />
         </div>
       </div>
     </div>
