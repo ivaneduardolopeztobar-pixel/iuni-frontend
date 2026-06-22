@@ -6,14 +6,14 @@ import api from "../api/client";
 const JOB_TYPES = ["", "Tiempo completo", "Medio tiempo", "Pasantia", "Por proyecto", "Freelance"];
 
 export default function JobAlerts() {
-  const [alert, setAlert] = useState({ keywords: "", jobType: "", city: "", active: true });
+  const [alertConfig, setAlertConfig] = useState({ keywords: "", jobType: "", city: "", active: true });
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [toast, setToast] = useState("");
 
   useEffect(() => {
     api.get("/alerts").then(r => {
-      if (r.data) setAlert(r.data);
+      if (r.data) setAlertConfig(r.data);
     }).finally(() => setLoading(false));
   }, []);
 
@@ -25,8 +25,8 @@ export default function JobAlerts() {
   const handleSave = async () => {
     setSaving(true);
     try {
-      const { data } = await api.post("/alerts", alert);
-      setAlert(data);
+      const { data } = await api.post("/alerts", alertConfig);
+      setAlertConfig(data);
       showToast("Alerta guardada exitosamente");
     } catch { alert("Error al guardar"); }
     finally { setSaving(false); }
@@ -64,22 +64,22 @@ export default function JobAlerts() {
           {/* Toggle activo */}
           <div className="flex items-center justify-between p-4 bg-white/[0.04] rounded-xl border border-white/10">
             <div className="flex items-center gap-3">
-              {alert.active
+              {alertConfig.active
                 ? <Bell size={20} className="text-red-500" />
                 : <BellOff size={20} className="text-gray-600" />
               }
               <div>
                 <p className="font-semibold text-sm">Alertas activas</p>
                 <p className="text-gray-500 text-xs">
-                  {alert.active ? "Recibes emails de nuevas ofertas" : "No recibes emails"}
+                  {alertConfig.active ? "Recibes emails de nuevas ofertas" : "No recibes emails"}
                 </p>
               </div>
             </div>
             <button
-              onClick={() => setAlert(a => ({ ...a, active: !a.active }))}
-              className={"relative w-12 h-6 rounded-full transition-colors " + (alert.active ? "bg-red-600" : "bg-gray-700")}
+              onClick={() => setAlertConfig(a => ({ ...a, active: !a.active }))}
+              className={"relative w-12 h-6 rounded-full transition-colors " + (alertConfig.active ? "bg-red-600" : "bg-gray-700")}
             >
-              <div className={"absolute top-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform " + (alert.active ? "translate-x-6" : "translate-x-0.5")} />
+              <div className={"absolute top-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform " + (alertConfig.active ? "translate-x-6" : "translate-x-0.5")} />
             </button>
           </div>
 
@@ -88,8 +88,8 @@ export default function JobAlerts() {
             <div>
               <label className="text-gray-400 text-sm mb-1.5 block">Palabras clave</label>
               <input
-                value={alert.keywords || ""}
-                onChange={e => setAlert(a => ({ ...a, keywords: e.target.value }))}
+                value={alertConfig.keywords || ""}
+                onChange={e => setAlertConfig(a => ({ ...a, keywords: e.target.value }))}
                 placeholder="Ej: desarrollador, diseñador, QA..."
                 className="w-full bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder-gray-600 focus:outline-none focus:border-red-600 transition"
               />
@@ -99,8 +99,8 @@ export default function JobAlerts() {
             <div>
               <label className="text-gray-400 text-sm mb-1.5 block">Tipo de empleo</label>
               <select
-                value={alert.jobType || ""}
-                onChange={e => setAlert(a => ({ ...a, jobType: e.target.value }))}
+                value={alertConfig.jobType || ""}
+                onChange={e => setAlertConfig(a => ({ ...a, jobType: e.target.value }))}
                 className="w-full bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-red-600 transition"
               >
                 <option value="">Cualquier tipo</option>
@@ -111,8 +111,8 @@ export default function JobAlerts() {
             <div>
               <label className="text-gray-400 text-sm mb-1.5 block">Ciudad</label>
               <input
-                value={alert.city || ""}
-                onChange={e => setAlert(a => ({ ...a, city: e.target.value }))}
+                value={alertConfig.city || ""}
+                onChange={e => setAlertConfig(a => ({ ...a, city: e.target.value }))}
                 placeholder="Ej: San Salvador, Santa Ana..."
                 className="w-full bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder-gray-600 focus:outline-none focus:border-red-600 transition"
               />
@@ -123,9 +123,9 @@ export default function JobAlerts() {
           <div className="p-4 bg-white/[0.04] rounded-xl border border-white/10">
             <p className="text-xs text-gray-500 mb-2 font-medium">RECIBIRIAS ALERTAS DE:</p>
             <p className="text-sm text-gray-300">
-              {alert.keywords ? ("Empleos con " + alert.keywords) : "Todos los empleos"}
-              {alert.jobType ? " de tipo " + alert.jobType : ""}
-              {alert.city ? " en " + alert.city : ""}
+              {alertConfig.keywords ? ("Empleos con " + alertConfig.keywords) : "Todos los empleos"}
+              {alertConfig.jobType ? " de tipo " + alertConfig.jobType : ""}
+              {alertConfig.city ? " en " + alertConfig.city : ""}
             </p>
           </div>
 
