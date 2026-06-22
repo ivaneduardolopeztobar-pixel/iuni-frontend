@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { ArrowLeft, MapPin, Briefcase, Globe, Car, Plane, FileText, Mail } from "lucide-react";
+import { ArrowLeft, MapPin, Briefcase, Globe, Car, Plane, FileText, Mail, GraduationCap, ShieldCheck } from "lucide-react";
 import Navbar from "../components/Navbar";
 import SEO from "../components/SEO";
 import api from "../api/client";
@@ -66,8 +66,10 @@ export default function StudentPublicProfile() {
                   {student?.city && (
                     <span className="flex items-center gap-1"><MapPin size={11} />{student.city}{student.country ? ", " + student.country : ""}</span>
                   )}
-                  {student?.user?.email && (
-                    <span className="flex items-center gap-1"><Mail size={11} />{student.user.email}</span>
+                  {student && student.university && (
+                    <span className="flex items-center gap-1 bg-green-500/10 border border-green-500/20 text-green-400 px-2 py-0.5 rounded-full text-xs font-semibold">
+                      <ShieldCheck size={11} /> {student.university}
+                    </span>
                   )}
                   {student?.career && (
                     <span className="flex items-center gap-1"><Briefcase size={11} />{student.career}</span>
